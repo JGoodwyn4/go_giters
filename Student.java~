@@ -1,0 +1,20 @@
+
+public class Student extends User
+{
+    // Either have a separate class to hold all of student info or have a variable for each
+
+
+    Student(String username, String password)
+    {
+	super(username,password);
+
+	// Call on method that goes to A&R and saves appropriate student info
+    }
+    
+    Student(User userInfo)
+    {
+	super(userInfo);
+
+	// Call on method that goes to A&R and saves appropriate student info
+    }
+}
