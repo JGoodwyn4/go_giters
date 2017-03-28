@@ -11,6 +11,7 @@ public class Student extends User
 	super(username,password);
 
 	// Call on method that goes to A&R and saves appropriate student info
+	storeStudentInfo();
     }
     
     Student(User userInfo)
@@ -18,6 +19,7 @@ public class Student extends User
 	super(userInfo);
 
 	// Call on method that goes to A&R and saves appropriate student info
+	storeStudentInfo();
     }
 
     public String getCollege()
@@ -35,7 +37,7 @@ public class Student extends User
 	return registered;
     }
 
-    private void getStudentInfo()
+    private void storeStudentInfo()
     {
 	// Call to A&R to obtain student info
 	// Send this.getUsername() to A&R

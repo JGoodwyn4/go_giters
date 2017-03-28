@@ -22,5 +22,8 @@ public class ElectionCommissioner extends Student
 
     }
 
-    
+    public Ballot editBallot()
+    {
+
+    }
 }

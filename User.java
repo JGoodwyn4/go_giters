@@ -2,7 +2,6 @@
 public class User
 {
     private String username;
-    private String password;
 
     User(String uName, String pWord)
     {
@@ -12,7 +11,7 @@ public class User
 
     User(User userInfo)
     {
-	this(userInfo.username,userInfo.password);
+	this.username = userInfo.username;
     }
 
     public String getUsername()
@@ -20,12 +19,18 @@ public class User
 	return username;
     }
 
-    public boolean login()
+    public boolean login(String password)
     {
 	// If statement would call to OIT for verification of username/password combo
 	if(true)
 	    return true;
 
+	return false;
+    }
+
+    public boolean isHSO()
+    {
+	// Will contact A&R to see if user is the HSO
 	return false;
     }
 }
