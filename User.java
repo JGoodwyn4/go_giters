@@ -60,6 +60,14 @@ public class User
     public boolean isHSO()
     {
 	// Will contact A&R to see if user is the HSO
+
+	// Was thinking that the A&R "database" file will list username data by comma in order
+	// So after the username, I was thinking that we could have a value of 0 or 1
+	// where 1 means user is a student and 0 means user is the HSO
 	return false;
     }
+
+    // Will have an isEC() method that will call a method from the ECList class (which will read
+    // and store EC usernames) that will pass the username and return a response if the name
+    // is contained in the ECList
 }
