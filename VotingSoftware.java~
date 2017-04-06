@@ -1,0 +1,136 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.net.*;
+
+class VotingSoftware extends JFrame implements ActionListener{
+    
+    BufferedReader readIn;
+    PrintWriter writeOut;
+    Socket sock;
+    
+    JTextField txtUser;
+    JTextField txtPass;
+    ButtonGroup btnGroup;
+    //JTextArea txtInfo;
+    
+    VotingSoftware()
+    {
+	
+        JPanel panelMain = new JPanel();
+        GroupLayout layout = new GroupLayout(panelMain);
+        JPanel pnlUser = new JPanel();
+	JPanel pnlPass = new JPanel();
+	
+	
+        // text fields
+	txtUser = new JTextField(25);
+	txtPass = new JTextField(25);
+	//txtInfo = new JTextArea(15,50);
+	
+	
+	// labels
+        JLabel userLabel = new JLabel("Username:");
+	JLabel passLabel = new JLabel("Password:");
+	
+	
+	
+	// Buttons
+	JButton loginButton = new JButton("Login");
+	loginButton.setActionCommand("log");
+	loginButton.addActionListener(this);
+
+	pnlUser.add(userLabel);
+	pnlUser.add(txtUser);
+
+	pnlPass.add(passLabel);
+	pnlPass.add(txtPass);
+
+	/*
+	JButton Butt2 = new JButton("Exit");
+	Butt2.setActionCommand("SD");
+	Butt2.addActionListener(this);
+	
+	JButton Butt3 = new JButton("Forgot Password");
+	Butt3.setActionCommand("FP");
+	Butt3.addActionListener(this);
+	
+	JButton Butt4 = new JButton("Forgot Username");
+	Butt4.setActionCommand("FU");
+	Butt4.addActionListener(this);
+	
+	
+	
+	btnGroup = new ButtonGroup();
+        btnGroup.add(Butt1);
+        btnGroup.add(Butt2);
+	btnGroup.add(Butt3);
+        btnGroup.add(Butt4);
+	
+	
+	
+	JLabel lblSize = new JLabel("Operations:  ");
+        lblSize.setFont(new Font(lblSize.getFont().getName(), Font.PLAIN, 20));
+        pnlButtons.add(lblSize);
+        pnlButtons.add(Butt1);
+        pnlButtons.add(Butt2);
+	pnlButtons.add(Butt3);
+	pnlButtons.add(Butt4);
+	*/
+	
+	//layout
+	panelMain.setLayout(layout);
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
+	
+        layout.setHorizontalGroup(
+				  layout.createSequentialGroup()
+				  .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+					    .addComponent(pnlUser)
+					    .addComponent(pnlPass)
+					    .addComponent(loginButton))   
+				  
+				  );
+        layout.setVerticalGroup(
+				layout.createParallelGroup()
+				.addGroup(layout.createSequentialGroup()
+					  .addComponent(pnlUser)
+					  .addComponent(pnlPass)
+					  .addComponent(loginButton))
+				);
+        
+	
+	
+	setSize(1000,350);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setTitle("GUI");
+	//panelMain.setBackground(Color.green);
+        getContentPane().add(panelMain);
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - this.getWidth()) /2 );
+        int y = (int) ((dimension.getHeight() - this.getHeight()) /2);
+        setLocation(x, y);
+        setVisible(true);
+	
+	
+    }
+    
+    
+    public void actionPerformed(ActionEvent e)
+    {
+	if(e.getActionCommand().equals("log"))
+	    {
+		StringBuffer strInfo = new StringBuffer();
+		strInfo.append(txtName.getText() + "\n");
+		txtInfo.setText(strInfo.toString());   
+	    }
+	
+    }
+    
+    
+    public static void main(String args[])
+    {
+        new VotingSoftware();
+    }
+}

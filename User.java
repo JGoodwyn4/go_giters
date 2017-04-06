@@ -1,12 +1,15 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+
 
 public class User
 {
     private String username;
 
-    User(String uName, String pWord)
+    User(String uName)
     {
 	username = uName;
-	password = pWord;
     }
 
     User(User userInfo)
@@ -22,9 +25,35 @@ public class User
     public boolean login(String password)
     {
 	// If statement would call to OIT for verification of username/password combo
-	if(true)
-	    return true;
-
+	try
+	    {
+		File filePath = new File("LoginInfo.txt");
+		Scanner fileRead = new Scanner(filePath);
+		
+		while(fileRead.hasNextLine())
+		    {
+			String userPass[] = (fileRead.nextLine()).split(",");
+			if(userPass.length == 2)
+			    {
+				if(userPass[0].equals(username))
+				    {
+					if(userPass[1].equals(password))
+					    return true;
+					else
+					    return false;
+				    }
+			    }
+		    }
+	    }
+	catch(NullPointerException ex)
+	    {
+		System.out.println(ex.getMessage());
+	    }
+	catch(FileNotFoundException ex)
+	    {
+		System.out.println(ex.getMessage());
+	    }
+	
 	return false;
     }
 
