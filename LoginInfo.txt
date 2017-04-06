@@ -1,2 +1,4 @@
 admin,admin
-jcgoodwyn,testP@ssw0rd
+tester1,numb3r5
+tester2,caseSENSITIVE
+tester3,$pe<i@|
