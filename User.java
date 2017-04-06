@@ -67,7 +67,12 @@ public class User
 	return false;
     }
 
+    public boolean isEC()
+    {
     // Will have an isEC() method that will call a method from the ECList class (which will read
     // and store EC usernames) that will pass the username and return a response if the name
     // is contained in the ECList
+
+	return false;
+    }
 }

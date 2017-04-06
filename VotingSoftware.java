@@ -7,8 +7,7 @@ import java.net.*;
 class VotingSoftware extends JFrame implements ActionListener{
 
     User currentUser;
-
-    
+ 
     BufferedReader readIn;
     PrintWriter writeOut;
     Socket sock;
