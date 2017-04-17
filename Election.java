@@ -95,8 +95,56 @@ public class Election
     public int getEndMinute() { return endMinute; }
     public int getEndSecond() { return endSecond; }
 
-    // Get and Set methods for all of the start/stop times
-    // Get methods -> creation of ballot
-    // Set methods -> EC management of ballot
+    public void addBallot()
+    {
+	ballotList.add(new Ballot());
+    }
+
+    // Returns a ballot given it's specific ID
+    public Ballot getBallot(int ballotID)
+    {
+	Ballot result = null;
+	
+	boolean found = false;
+        for(int i = 0; found != true && i < ballotList.size(), i++)
+	    {
+		if((ballotList.get(i)).getBallotID() == ballotID)
+		    {
+			result = ballot;
+			found = true;
+		    }
+	    }
+
+	return result;
+    }
+
+    // Returns a corresponding ballot ID if user doesn't violate constraints.
+    // If violated, will return a -1
+    // Can be used to see if a user is eligable for any ballot in an election and get it's ID at the same time
+    public int getValidBallotID(String college, String major, String rank, boolean registered, boolean undergrad)
+    {
+	int result = -1;
+
+	if(!isActive())
+	    return result;	    
+	
+	boolean found = false;
+	for(int i = 0; found != true && i < ballotList.size(), i++)
+	    {
+		Ballot temp = ballotList.get(i);
+		if(temp.isValid(college,major,rank,undergrad,registered))
+		    {
+			result = temp.getBallotID();
+			found = true;
+		    }
+	    }
+
+	return result;
+    }
+
+    public Vote getVote()
+    {
+	return voteRecords;
+    }
 
 }
