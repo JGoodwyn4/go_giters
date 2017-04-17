@@ -44,14 +44,9 @@ public class Election
 
     public String getName() { return electionName; }
     public void setName(String newName) { electionName = newName; }
+    public boolean isActive() { return (hasStarted() && (!hasEnded())); }
 
-    public boolean isActive()
-    {
-	// Return a boolean if election has started and not ended
-	return (hasStarted() && (!hasEnded()));
-    }
-
-    private boolean hasStarted()
+    public boolean hasStarted()
     {
 	// Return a boolean if date/time is equal to or past start
     }
@@ -66,6 +61,7 @@ public class Election
 	startSec = sSec;
     }
 
+    // Get methods for the start date/time
     public int getStartDay() { return startDay; }
     public int getStartMonth() { return startMonth; }
     public int getStartYear() { return startYear; }
@@ -88,6 +84,7 @@ public class Election
 	endSec = eSec;
     }
 
+    // Get methods for the end date/time
     public int getEndDay() { return endDay; }
     public int getEndMonth() { return endMonth; }
     public int getEndYear() { return endYear; }
@@ -100,22 +97,46 @@ public class Election
 	ballotList.add(new Ballot());
     }
 
+    public void removeBallot(int ballotID)
+    {
+	if(hasStarted())
+	    return;
+
+	Ballot result = getBallot(ballotID);
+	if(result.equals(null))
+	    return;
+
+	ballotList.remove(result);
+    }
+
     // Returns a ballot given it's specific ID
     public Ballot getBallot(int ballotID)
     {
-	Ballot result = null;
-	
+        int index = getBallotIndex(ballotID);
+
+	if(index != -1)
+	    {
+	        return ballotList.get(index);
+	    }
+
+	return null;
+    }
+
+    private int getBallotIndex(int ballotID)
+    {
+	int index = -1;
+
 	boolean found = false;
         for(int i = 0; found != true && i < ballotList.size(), i++)
 	    {
 		if((ballotList.get(i)).getBallotID() == ballotID)
 		    {
-			result = ballot;
+			index = i;
 			found = true;
 		    }
 	    }
 
-	return result;
+	return index;
     }
 
     // Returns a corresponding ballot ID if user doesn't violate constraints.
@@ -142,9 +163,26 @@ public class Election
 	return result;
     }
 
+    // Access vote to display records
     public Vote getVote()
     {
 	return voteRecords;
+    }
+
+    public void disqualify(String username)
+    {
+	if(!voteRecords.hasVoted(username))
+	    return;
+
+	// Get each race ID's and choice ID's from user's racevote and decrement vote counters
+
+	// After that, remove the racevote from the vote class
+    }
+
+    // Not sure if this would be in the election class
+    public void certify()
+    {
+
     }
 
 }
