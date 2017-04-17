@@ -5,11 +5,12 @@ public class Election
 {
     private String electionName;
     
-    // We may want to create a class that holds all the start/end values. Maybe a Date class
+    // Might want to use a Date class or something similar for the dates/times
     private int startDay, startMonth, startYear, startHour, startMinute, startSec;
     private int endDay, endMonth, endYear, endHour, endMinute, endSec;
     private String usernameEC;
     private int electionID;
+    private boolean isCertified;
 
     private Vote voteRecords;
     private ArrayList<Ballot> ballotList;
@@ -37,14 +38,21 @@ public class Election
 
 	usernameEC = ECUser;
 	electionID = id;
+	isCertified = false;
 
 	voteRecords = new Vote();
 	ballotList = new ArrayList<Ballot>();
     }
 
+    public boolean isElection(int eID) { return (electionID == eID); }
+    public int getElectionID() { return electionID; }
     public String getName() { return electionName; }
     public void setName(String newName) { electionName = newName; }
+    public String getECUser() { return usernameEC; }
     public boolean isActive() { return (hasStarted() && (!hasEnded())); }
+    public void setCertify() { isCertified = true; }
+    public boolean isCertified() { return isCertified; }
+    public int numBallots() { return ballotList.size(); }
 
     public boolean hasStarted()
     {
@@ -94,7 +102,7 @@ public class Election
 
     public void addBallot()
     {
-	ballotList.add(new Ballot());
+	ballotList.add(new Ballot(electionID));
     }
 
     public void removeBallot(int ballotID)
@@ -178,11 +186,4 @@ public class Election
 
 	// After that, remove the racevote from the vote class
     }
-
-    // Not sure if this would be in the election class
-    public void certify()
-    {
-
-    }
-
 }
