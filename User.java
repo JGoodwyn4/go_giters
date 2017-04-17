@@ -24,9 +24,9 @@ public class User
 
     public boolean login(String password)
     {
-	// If statement would call to OIT for verification of username/password combo
 	try
 	    {
+		// Read login info/OIT records
 		File filePath = new File("LoginInfo.txt");
 		Scanner fileRead = new Scanner(filePath);
 		
