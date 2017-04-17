@@ -78,14 +78,14 @@ public class Election
 	// Return a boolean if date/time is equal to or past end
     }
 
-    public void setEnd(int sDay, int sMonth, int sYear, int sHour, int sMin, int sSec)
+    public void setEnd(int eDay, int eMonth, int eYear, int eHour, int eMin, int eSec)
     {
-	startDay = sDay;
-	startMonth = sMonth;
-	startYear = sYear;
-	startHour = sHour;
-	startMinute = sMin;
-	startSec = sSec;
+	endDay = eDay;
+	endMonth = eMonth;
+	endYear = eYear;
+	endHour = eHour;
+	endMinute = eMin;
+	endSec = eSec;
     }
 
     public int getEndDay() { return endDay; }
