@@ -6,30 +6,28 @@ public class RaceVote
     private String voterUsername;
     private int electionID;
     private int ballotID;
-    private ArrayList<VoteCounter> voteChoices;
+    private ArrayList<int> raceIDs;
+    private ArrayList<int> choiceIDs;
 
-    public RaceVote(String username, int eID, int bID, ArrayList<VoteCounter> votes)
+    public RaceVote(String username, int eID, int bID, ArrayList<int> rIDs, ArrayList<int> cIDs)
     {
 	voterUsername = username;
 	electionID = eID;
 	ballotID = bID;
 	voteChoices = votes;
+	raceIDs = rIDs;
+	choiceIDs = cIDs;
     }
 
-    public void removeVotes()
-    {
-	for(VoteCounter vote : choices)
-	    {
-		// Rename method depending on what it's called in the VoteCounter class
-		vote.down();
-	    }
-    }
-
-    public boolean isUsername(String username)
+    public boolean isUser(String username)
     {
 	if(voterUsername.equalsIgnoreCase(username))
 	    return true;
 
 	return false;
     }
+
+    public int getBallotID() { return ballotID; }
+    public ArrayList<int> getRaceID() { return raceIDs; }
+    public ArrayList<int> getChoiceID() { return choiceIDs; }
 }
