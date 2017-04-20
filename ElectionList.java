@@ -46,6 +46,15 @@ public class ElectionList
     {
 
     }
+    
+    public ArrayList<Election> getECElections(String name){
+    	ArrayList<Election> temp = new ArrayList<Election>();
+    	
+    	for(Election e: elections){
+    		if(!e.hasStarted() && name.equalsIgnoreCase(e.getECUser())) temp.add(e);
+    	}
+    	return temp;
+    }
 
     public void addActiveElection(Election newElection)
     {
@@ -56,4 +65,5 @@ public class ElectionList
     {
 
     }
+    
 }
