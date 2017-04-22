@@ -1,0 +1,46 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.ArrayList;
+
+class ManageECGUI implements ActionListener
+{
+    // Attributes
+    
+
+    ManageEC()
+    {
+	ArrayList<String> nameList = ECList.getNames();
+	
+	JFrame window = new JFrame("Manage Election Commissioners");
+	JPanel display = new JPanel();
+
+	GridLayout layout = new GridLayout(0,1);
+	display.setLayout(layout);
+
+	for(int i = 0; i < nameList.size(); i++)
+	    {
+		String name = nameList.get(i);
+		
+		JPanel temp = new JPanel();
+		temp.setLayout(new FlowLayout());
+		
+		temp.add(new JTextArea(name));
+		
+		JButton removeButton = new JButton("X");
+		removeButton.addActionListener(this);
+		removeButton.addActionCommand(name);
+		temp.add(removeButton);
+
+		display.add(temp);
+	    }
+
+	
+    }
+
+    public static void main(String[] args)
+    {
+	new ManageECGUI();
+    }
+}

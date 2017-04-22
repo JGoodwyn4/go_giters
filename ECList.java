@@ -1,17 +1,17 @@
-import java.util.HashMap;
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 
 public class ECList
 {
-    HashMap<String,String> usernameList;
+    ArrayList<String> usernameList;
     File list;
     Scanner dataReader;
 
     public ECList()
     {
-	usernameList = new HashMap<String,String>();
+	usernameList = new ArrayList<String>();
 	
 	try
 	    {
@@ -35,10 +35,8 @@ public class ECList
 		    {
 			String name = dataReader.nextLine();
 
-			if(!name.equals("") && !usernameList.containsKey(name))
-			    {
-				usernameList.put(name,name);
-			    }
+			if(!name.equals(""))
+			    usernameList.add(name);
 		    }
 	    }
 	catch(FileNotFoundException ex)
@@ -49,13 +47,21 @@ public class ECList
 
     public void addEC(String user)
     {
-	if(!usernameList.containsKey(user))
-	    {
-		usernameList.put(user,user);
-	    }
+	if(usernameList.indexOf(user) == -1)
+	    usernameList.add(user);
     }
 
     public void removeEC(String user)
+    {
+	if(usernameList.indexOf(user) != -1)
+	    usernameList.remove(user);
+
+	update();
+    }
+
+    public ArrayList<String> getList() { return usernameList; }
+
+    public void update()
     {
 
     }
