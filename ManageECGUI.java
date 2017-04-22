@@ -71,8 +71,19 @@ class ManageECGUI implements ActionListener
 
     public void actionPerformed(ActionEvent e)
     {
-	String insert = e.getActionCommand();
-	JOptionPane.showMessageDialog(null,"Remove Command for: " + insert,"Test",JOptionPane.PLAIN_MESSAGE);
+	if(e.getActionCommand().equals("closeEC"))
+	    {
+		window.dispose();
+	    }
+	else if(e.getActionCommand().equals("addEC"))
+	    {
+		
+	    }
+	else
+	    {
+		String insert = e.getActionCommand();
+		JOptionPane.showMessageDialog(null,"Remove Command for: " + insert,"Test",JOptionPane.PLAIN_MESSAGE);
+	    }
     }
 
     public static void main(String[] args)
