@@ -7,14 +7,14 @@ import java.util.ArrayList;
 class ManageECGUI implements ActionListener
 {
     // Attributes
-    ArrayList<JPanel> ecPanel;
+    //ArrayList<JPanel> ecPanel;
     JFrame window;
 
     ManageECGUI()
     {
 	ECList holder = new ECList();
 	ArrayList<String> nameList = holder.getList();
-	ecPanel = new ArrayList<JPanel>();
+	//ecPanel = new ArrayList<JPanel>();
 	
         window = new JFrame("Manage Election Commissioners");
 	JPanel display = new JPanel();
@@ -42,7 +42,7 @@ class ManageECGUI implements ActionListener
 		removeButton.setActionCommand(name);
 		temp.add(removeButton);
 
-		ecPanel.add(temp);
+		//ecPanel.add(temp);
 
 		display.add(temp);
 	    }
