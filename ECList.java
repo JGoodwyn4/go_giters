@@ -47,19 +47,27 @@ public class ECList
 
     public void addEC(String user)
     {
-	if(usernameList.indexOf(user) == -1)
+	if(hasUser(user))
 	    usernameList.add(user);
     }
 
     public void removeEC(String user)
     {
-	if(usernameList.indexOf(user) != -1)
+	if(hasUser(user))
 	    usernameList.remove(user);
 
 	update();
     }
 
     public ArrayList<String> getList() { return usernameList; }
+
+    public boolean hasUser(String username)
+    {
+	if(usernameList.indexOf(username) != -1)
+	    return true;
+
+	return false;
+    }
 
     public void update()
     {

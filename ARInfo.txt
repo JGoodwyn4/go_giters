@@ -1,0 +1,7 @@
+admin,0
+tester1,1,Engineering,Computer Science,Sophomore,true,true
+tester2,1,Not Engineering,Art History,Senior,true,true
+tester3,1,Engineering,Computer Engineering,Freshman,true,false
+ecUser,1,Engineering,Electrical Engineering,Senior,true,true
+studentA,1,Not Engineering,Business,Sophomore,false,true
+

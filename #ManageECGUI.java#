@@ -7,18 +7,19 @@ import java.util.ArrayList;
 class ManageECGUI implements ActionListener
 {
     // Attributes
-    //ArrayList<JPanel> ecPanel;
+    ArrayList<JPanel> ecPanel;
     JFrame window;
 
     ManageECGUI()
     {
 	ECList holder = new ECList();
 	ArrayList<String> nameList = holder.getList();
-	//ecPanel = new ArrayList<JPanel>();
+	ecPanel = new ArrayList<JPanel>();
 	
         window = new JFrame("Manage Election Commissioners");
 	JPanel display = new JPanel();
 
+	BoxLayout layout = new BoxLayout(display,);
 	GridLayout layout = new GridLayout(0,1);
 	display.setLayout(layout);
 
@@ -26,7 +27,7 @@ class ManageECGUI implements ActionListener
 	info.setEditable(false);
 	display.add(info);
 
-	JPanel ecContainer = new JPanel();
+        JScrollPane ecContainer = new JScrollPane();
 	//ecContainer.setLayout(layout);
 	
 	for(int i = 0; i < nameList.size(); i++)
@@ -45,7 +46,7 @@ class ManageECGUI implements ActionListener
 		removeButton.setActionCommand(name);
 		temp.add(removeButton);
 
-		//ecPanel.add(temp);
+		ecPanel.add(temp);
 
 	        ecContainer.add(temp);
 	    }
@@ -87,6 +88,7 @@ class ManageECGUI implements ActionListener
 	else
 	    {
 		String insert = e.getActionCommand();
+		
 		JOptionPane.showMessageDialog(null,"Remove Command for: " + insert,"Test",JOptionPane.PLAIN_MESSAGE);
 	    }
     }
