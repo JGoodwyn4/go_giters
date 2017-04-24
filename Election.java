@@ -13,7 +13,8 @@ public class Election
     private boolean isCertified;
 
     private Vote voteRecords;
-    private ArrayList<Ballot> ballotList;
+    //private ArrayList<Ballot> ballotList;
+    Ballot mainBallot;
 
 
     // Constructor
@@ -41,7 +42,8 @@ public class Election
 	isCertified = false;
 
 	voteRecords = new Vote();
-	ballotList = new ArrayList<Ballot>();
+	//ballotList = new ArrayList<Ballot>();
+	mainBallot = new Ballot(electionID,0);
     }
 
     public boolean isElection(int eID) { return (electionID == eID); }
@@ -102,9 +104,10 @@ public class Election
 
     public void addBallot()
     {
-	ballotList.add(new Ballot(electionID));
+	ballotList.add(new Ballot(electionID,0));
     }
 
+    /*
     public void removeBallot(int ballotID)
     {
 	if(hasStarted())
@@ -116,10 +119,12 @@ public class Election
 
 	ballotList.remove(result);
     }
+    */
 
     // Returns a ballot given it's specific ID
-    public Ballot getBallot(int ballotID)
+    public Ballot getBallot()//int ballotID)
     {
+	/*
         int index = getBallotIndex(ballotID);
 
 	if(index != -1)
@@ -128,8 +133,14 @@ public class Election
 	    }
 
 	return null;
+	*/
+
+	return mainBallot.
     }
 
+    //public ArrayList<Ballot> getBallotList() { return ballotList; }
+
+    /*
     private int getBallotIndex(int ballotID)
     {
 	int index = -1;
@@ -146,10 +157,12 @@ public class Election
 
 	return index;
     }
+    */
 
     // Returns a corresponding ballot ID if user doesn't violate constraints.
     // If violated, will return a -1
     // Can be used to see if a user is eligable for any ballot in an election and get it's ID at the same time
+    /*
     public int getValidBallotID(String college, String major, String rank, boolean registered, boolean undergrad)
     {
 	int result = -1;
@@ -169,6 +182,15 @@ public class Election
 	    }
 
 	return result;
+    }
+    */
+
+    public boolean isBallotValid(String username, String college, String major, String rank, boolean registered, boolean undergrad)
+    {
+	if(voteRecords.hasVoted(username))
+	    return false;
+
+	return mainBallot.isValid(username,college,major,rank,registered,undergrad);
     }
 
     // Access vote to display records

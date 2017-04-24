@@ -51,6 +51,7 @@ public class Vote
         votes.remove(temp);
     }
 
+    public int getNumVotes() { return votes.size(); }
     public int[] getCollegeCount() { return collegeCount; }
     public int[] getMajorCount() { return majorCount; }
     public int[] getRankCount() { return rankCount; }
@@ -137,10 +138,10 @@ public class Vote
 	
 	switch(college)
 	    {
-	    case "college0":
+	    case "Engineering":
 		index = 0;
 		break;
-	    case "college1":
+	    case "Not Engineering":
 		index = 1;
 		break;
 	    default:
@@ -156,19 +157,19 @@ public class Vote
 	
 	switch(major)
 	    {
-	    case "major0":
+	    case "Computer Science":
 		index = 0;
 		break;
-	    case "major1":
+	    case "Electrical Engineering":
 		index = 1;
 		break;
-	    case "major2":
+	    case "Computer Engineering":
 		index = 2;
 		break;
-	    case "major3":
+	    case "Business":
 		index = 3;
 		break;
-	    case "major4":
+	    case "Art History":
 		index = 4;
 		break;
 	    default:
@@ -184,16 +185,16 @@ public class Vote
 	
 	switch(rank)
 	    {
-	    case "freshman":
+	    case "Freshman":
 		index = 0;
 		break;
-	    case "sophomore":
+	    case "Sophomore":
 		index = 1;
 		break;
-	    case "junior":
+	    case "Junior":
 		index = 2;
 		break;
-	    case "senior":
+	    case "Senior":
 		index = 3;
 		break;
 	    default:

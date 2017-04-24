@@ -1,0 +1,44 @@
+import java.util.ArrayList;
+
+public class NonBinaryRace extends Race{
+	
+	private ArrayList<Candidates> candidates;
+	private int numWinners;
+	private int maxChoices;
+
+	public NonBinaryRace(String raceName, int raceID, int ballotID, int electionID, ArrayList<Candidates> candidates, int numWinners, int maxChoices) {
+		super(raceName, raceID, ballotID, electionID);
+		this.candidates = candidates;
+		this.numWinners = numWinners;
+		this.maxChoices = maxChoices;
+	}
+	
+	public void setNumWiners(int numWinners){
+		this.numWinners = numWinners;
+	}
+	
+	public void setMaxChoices(int maxChoices){
+		this.maxChoices = maxChoices;
+	}
+	
+	public int getNumWinners(){
+		return numWinners;
+	}
+	
+	public int getMaxChoices(){
+		return maxChoices;
+	}
+	
+	public void addCandidate(Candidates candidate){
+		candidates.add(candidate);
+	}
+	
+	public void removeCandidate(Candidates candidate){
+		if(candidates.contains(candidate)) candidates.remove(candidate);
+	}
+	
+	public int numCandidates(){
+		return candidates.size();
+	}
+
+}

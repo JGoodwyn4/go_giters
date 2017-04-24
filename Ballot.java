@@ -42,7 +42,7 @@ public class Ballot
     public int getBallotID() { return ballotID; }
     public int isBallotID(int bID) { return (ballotID == bID); }
     public int numRaces() { return raceList.size(); }
-    public ArrayList<Race> getAllRaces() { return raceList; }
+    public ArrayList<Race> getRaceList() { return raceList; }
 
     public boolean isValid(String college, String major, String rank, boolean undergrad, boolean registered)
     {

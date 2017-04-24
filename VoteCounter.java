@@ -20,8 +20,6 @@ public class VoteCounter
     }
 
     public void up() { count++; }
-
     public void down() { count--; }
-
     public int getCount() { return count; }
 }

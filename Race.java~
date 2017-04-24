@@ -1,0 +1,33 @@
+
+public class Race {
+
+	private String raceName;
+	private int raceID;
+	private int ballotID;
+	private int electionID;
+	
+	public Race (String raceName, int raceID, int ballotID, int electionID){
+		
+		this.raceName = raceName;
+		this.raceID = raceID;
+		this.ballotID = ballotID;
+		this.electionID = electionID;
+	
+		
+	}
+	
+	public String getRaceName(){
+		return raceName;
+	}
+	
+	public void setRaceName(String raceName){
+		this.raceName = raceName;
+	}
+	
+	public boolean matchID(int raceID){
+		return this.raceID == raceID;
+		
+	}
+	
+	
+}
