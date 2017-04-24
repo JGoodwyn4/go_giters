@@ -21,12 +21,16 @@ class ManageECGUI implements ActionListener
         window = new JFrame("Manage Election Commissioners");
 	JPanel display = new JPanel();
 
-	BoxLayout layout = new BoxLayout(display,BoxLayout.Y_AXIS);
+	BoxLayout layout = new BoxLayout(display,BoxLayout.PAGE_AXIS);
 	//GridLayout layout = new GridLayout(0,1);
 	display.setLayout(layout);
 
 	JLabel info = new JLabel("Add and/or Remove Election Commissioners:");
+	info.setAlignmentX(Component.CENTER_ALIGNMENT);
 	display.add(info);
+
+	// Add Space between title and panel
+	display.add(Box.createRigidArea(new Dimension(0,10))); 
 
         ecContainer = new JPanel();
 	ecContainer.setLayout(new BoxLayout(ecContainer,BoxLayout.PAGE_AXIS));
@@ -35,12 +39,17 @@ class ManageECGUI implements ActionListener
 	addComponents();
 
 	JScrollPane scrollList = new JScrollPane(ecContainer);
+	scrollList.setAlignmentX(Component.CENTER_ALIGNMENT);
 	display.add(scrollList);
+
+	// Add Space between panel and buttons
+	display.add(Box.createRigidArea(new Dimension(0,10)));
 
 	JButton addEC = new JButton("Add a New EC");
 	addEC.addActionListener(this);
 	addEC.setActionCommand("addEC");
 	addEC.setAlignmentX(Component.CENTER_ALIGNMENT);
+
 
 	JButton close = new JButton("Close");
 	close.addActionListener(this);
@@ -48,9 +57,18 @@ class ManageECGUI implements ActionListener
 	close.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 	display.add(addEC);
+
+	// Small gap between buttons
+	display.add(Box.createRigidArea(new Dimension(0,5)));
+	
 	display.add(close);
 
+	// Gap after close button
+	display.add(Box.createRigidArea(new Dimension(0,10)));
+
 	window.setSize(400,350);
+	window.setResizable(false);
+	
         window.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         window.getContentPane().add(display);
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
