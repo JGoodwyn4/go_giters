@@ -51,7 +51,7 @@ class ManageECGUI implements ActionListener
 	display.add(close);
 
 	window.setSize(400,350);
-        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        window.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         window.getContentPane().add(display);
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - window.getWidth()) /2 );
@@ -118,8 +118,8 @@ class ManageECGUI implements ActionListener
 		// Open user input dialog box
 
 		
-		//holder.addEC();
-		updateList();
+	        new ecDialog();
+		//updateList();
 	    }
 	else
 	    {
@@ -137,14 +137,98 @@ class ManageECGUI implements ActionListener
 	new ManageECGUI();
     }
     
-    /*
+    
     private class ecDialog extends JFrame implements ActionListener
     {
+	private JTextField userInput;
+	
 	ecDialog()
 	{
+	    setTitle("Manage Election Commissioners");
 	    
+	    JPanel dialogPanel = new JPanel();
+	    
+	    //BoxLayout layout = new BoxLayout(dialogPanel,BoxLayout.Y_AXIS);
+	    dialogPanel.setLayout(new BoxLayout(dialogPanel,BoxLayout.Y_AXIS));
+	    
+	    JLabel instruct = new JLabel("Enter the Election Commissioner Username to be added:");
+	    dialogPanel.add(instruct);
+	    
+	    JLabel userLabel = new JLabel("Username: ");
+	    dialogPanel.add(userLabel);
+
+	    userInput = new JTextField();
+	    dialogPanel.add(userInput);
+	    
+	    JButton addButton = new JButton("Add EC");
+	    addButton.addActionListener(this);
+	    addButton.setActionCommand("addNewEC");
+	    addButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+	    
+	    JButton cancelButton = new JButton("Cancel");
+	    cancelButton.addActionListener(this);
+	    cancelButton.setActionCommand("cancelAdd");
+	    cancelButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+	    
+	    dialogPanel.add(addButton);
+	    dialogPanel.add(cancelButton);
+	    
+	    //setSize(400,350);
+	    setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+	    getContentPane().add(dialogPanel);
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (int) ((dimension.getWidth() - getWidth()) /2 );
+	    int y = (int) ((dimension.getHeight() - getHeight()) /2);
+	    setLocation(x, y);
+	    setVisible(true);
+	}
+	
+	public void actionPerformed(ActionEvent e)
+	{
+	    if(e.getActionCommand().equals("addNewEC"))
+		{
+		    String newEC = userInput.getText();
+		    
+		    if(newEC.equals(""))
+			{
+			    JOptionPane.showMessageDialog(null,"No Username was entered. Please enter in a Username","Incorrect Username",JOptionPane.ERROR_MESSAGE);
+			}
+		    else if(holder.hasUser(newEC))
+			{
+			    JOptionPane.showMessageDialog(null,"The Username you entered is already an EC. Please enter in a Username that is not already an EC","Incorrect Username",JOptionPane.ERROR_MESSAGE);
+			}
+		    else
+			{
+			    User temp = new User(newEC);
+
+			    // Check if "temp" user is actually a user in the system and
+			    // if they are a student. If either of these are false, then
+			    // alert that entered username is unable to become an EC.
+			    if(!temp.isUser())
+				{
+				    JOptionPane.showMessageDialog(null,"The Username entered is not a valid Username in the System. Please enter a valid Username","Incorrect Username",JOptionPane.ERROR_MESSAGE);
+				}
+			    else if(!temp.isStudent())
+				{
+				    JOptionPane.showMessageDialog(null,"The Username entered is not a Student. Please enter a Username associated with a Student","Incorrect Username",JOptionPane.ERROR_MESSAGE);
+				}
+			    else
+				{
+				    holder.addEC(newEC);
+				    
+				    JOptionPane.showMessageDialog(null,"The Username was successfully added to the list of Election Commissioners","Success",JOptionPane.PLAIN_MESSAGE);
+
+				    updateList();
+				    this.dispose();
+				}
+			}
+		}
+	    if(e.getActionCommand().equals("cancelAdd"))
+		{
+		    this.dispose();
+		}
 	}
     }
-    */
+    
     
 }

@@ -7,6 +7,11 @@ public class User
 {
     private String username;
 
+    User()
+    {
+	username = "";
+    }
+
     User(String uName)
     {
 	username = uName;
@@ -35,7 +40,7 @@ public class User
 			String userPass[] = (fileRead.nextLine()).split(",");
 			if(userPass.length == 2)
 			    {
-				if(userPass[0].equals(username))
+				if(userPass[0].equalsIgnoreCase(username))
 				    {
 					if(userPass[1].equals(password))
 					    return true;
@@ -76,7 +81,7 @@ public class User
 			String userRecord[] = (fileRead.nextLine()).split(",");
 			if(userRecord.length >= 2)
 			    {
-				if(userRecord[0].equals(username))
+				if(userRecord[0].equalsIgnoreCase(username))
 				    {
 				        if(Integer.parseInt(userRecord[1]) == 0)
 					    return true;
@@ -109,6 +114,82 @@ public class User
 	if(tempList.hasUser(username))
 	    return true;
 
+	return false;
+    }
+
+    public boolean isUser()
+    {
+	// Read through OIT records to see if there exists a username that matches the input
+	
+	// Used primarily when the User class is used as an object to get basic info about a
+	// generic user such as if they are actually a user, a student, etc.
+
+	try
+	    {
+		// Read login info/OIT records
+		File filePath = new File("LoginInfo.txt");
+		Scanner fileRead = new Scanner(filePath);
+		
+		while(fileRead.hasNextLine())
+		    {
+			String userPass[] = (fileRead.nextLine()).split(",");
+			if(userPass.length == 2)
+			    {
+				if(userPass[0].equalsIgnoreCase(username))
+				    return true;
+			    }
+		    }
+	    }
+	catch(NullPointerException ex)
+	    {
+		System.out.println(ex.getMessage());
+	    }
+	catch(FileNotFoundException ex)
+	    {
+		System.out.println(ex.getMessage());
+	    }
+	
+	return false;
+    }
+
+    public boolean isStudent()
+    {
+	// Will contact A&R to see if user is a student
+
+	// Was thinking that the A&R "database" file will list username data by comma in order
+	// So after the username, I was thinking that we could have a value of 0 or 1
+	// where 1 means user is a student and 0 means user is the HSO
+
+        try
+	    {
+		// Read AR records
+		File filePath = new File("ARInfo.txt");
+		Scanner fileRead = new Scanner(filePath);
+
+		while(fileRead.hasNextLine())
+		    {
+			String userRecord[] = (fileRead.nextLine()).split(",");
+			if(userRecord.length >= 2)
+			    {
+				if(userRecord[0].equalsIgnoreCase(username))
+				    {
+				        if(Integer.parseInt(userRecord[1]) == 1)
+					    return true;
+					else
+					    return false;					
+				    }
+			    }
+		    }
+	    }
+	catch(NullPointerException ex)
+	    {
+		System.out.println(ex.getMessage());
+	    }
+	catch(FileNotFoundException ex)
+	    {
+		System.out.println(ex.getMessage());
+	    }
+	
 	return false;
     }
 }
