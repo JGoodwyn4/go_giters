@@ -153,8 +153,13 @@ class ManageECGUI extends JFrame implements ActionListener
 	    }
 	else
 	    {
-		holder.removeEC(e.getActionCommand());
-	        updateList();
+		int choice = JOptionPane.showConfirmDialog(null,"Are you sure you want to remove the user: " + e.getActionCommand() + " ?","Confirmation",JOptionPane.YES_NO_OPTION);
+		
+		if(choice == JOptionPane.YES_OPTION)
+		    {
+			holder.removeEC(e.getActionCommand());
+			updateList();
+		    }
 	    }
     }
 
