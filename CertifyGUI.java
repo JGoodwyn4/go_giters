@@ -24,7 +24,7 @@ class CertifyGUI extends JFrame implements ActionListener
 
 	// ELECTION NAME
 	JPanel ePanel = new JPanel();
-	ePanel.setLayout(new BoxLayout(ePanel,BowLayout.LINE_AXIS));
+	ePanel.setLayout(new BoxLayout(ePanel,BoxLayout.LINE_AXIS));
 	JLabel electionTag = new JLabel("<html><b>" + "Election:" + "</b></html>");
 	JLabel electionName = new JLabel("<html><b>" + election.getName() + "</b></html>");
 	electionTag.setFont(new Font("Serif",Font.PLAIN, 18));
@@ -43,7 +43,7 @@ class CertifyGUI extends JFrame implements ActionListener
 	
 	// ELECTION EC CREATOR
 	JPanel ecPanel = new JPanel();
-	ecPanel.setLayout(new BoxLayout(ecPanel,BowLayout.LINE_AXIS));
+	ecPanel.setLayout(new BoxLayout(ecPanel,BoxLayout.LINE_AXIS));
 	JLabel ecTag = new JLabel("Election Commissioner:");
 	JLabel ecUser = new JLabel(election.getECUser());
 
@@ -60,7 +60,7 @@ class CertifyGUI extends JFrame implements ActionListener
 
 	// "Results" LABEL
 	JPanel resultPanel = new JPanel();
-	resultPanel.setLayout(new BoxLayout(ePanel,BowLayout.LINE_AXIS));
+	resultPanel.setLayout(new BoxLayout(ePanel,BoxLayout.LINE_AXIS));
 	JLabel resultTag = new JLabel("<html><b><i>" + "Results:" + "</i></b></html>");
         resultTag.setFont(new Font("Serif",Font.PLAIN, 16));
 	
@@ -70,17 +70,17 @@ class CertifyGUI extends JFrame implements ActionListener
 
 	// BALLOT INFO
 	Ballot mainBallot = election.getBallot();
-
+	ArrayList<Race> tempRace = mainBallot.getRaceList();
 
 	// RACE INFO
-	for(Race race : mainBallot.getRaceList())
+	for(Race race : tempRace)
 	    {
 		// Gap above each race panel
 	        main.add(Box.createRigidArea(new Dimension(0,15)));
 
 		// RACE NAME
 		JPanel rTag = new JPanel();
-		rTag.setLayout(new BoxLayout(rTag,BowLayout.LINE_AXIS));
+		rTag.setLayout(new BoxLayout(rTag,BoxLayout.LINE_AXIS));
 		JLabel raceName = new JLabel(race.getRaceName());
 
 		rTag.add(Box.createRigidArea(new Dimension(20,0))); // Space between left and label
@@ -183,13 +183,6 @@ class CertifyGUI extends JFrame implements ActionListener
 			        main.add(candHolder);
 			    }
 		    }
-		/*
-		else
-		    {
-			JLabel error = new JLabel("Something went wrong");
-			racePanel.add(error);
-		    }
-		*/
 	    }
 
 	// Gap between race information and start of demographics section
@@ -255,29 +248,29 @@ class CertifyGUI extends JFrame implements ActionListener
 			    {
 			    case 0:
 				JLabel college = new JLabel("Engineering");
-				JLabel collegeCount = new JLabel("-- Count: " + collegeCount[i]);
+				JLabel colCount = new JLabel("-- Count: " + collegeCount[i]);
 
 				cPanel.add(college);
 				cPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
-				cPanel.add(collegeCount);
+				cPanel.add(colCount);
 				break;
 				
 			    case 1:
 				JLabel college = new JLabel("Not Engineering");
-				JLabel collegeCount = new JLabel("-- Count: " + collegeCount[i]);
+				JLabel colCount = new JLabel("-- Count: " + collegeCount[i]);
 
 				cPanel.add(college);
 				cPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
-				cPanel.add(collegeCount);
+				cPanel.add(colCount);
 				break;
 				
 			    default:
 				JLabel college = new JLabel("Unrecognized");
-				JLabel collegeCount = new JLabel("-- Count: " + collegeCount[i]);
+				JLabel colCount = new JLabel("-- Count: " + collegeCount[i]);
 
 				cPanel.add(college);
 				cPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
-				cPanel.add(collegeCount);
+				cPanel.add(colCount);
 				break;
 			    }
 
@@ -285,26 +278,313 @@ class CertifyGUI extends JFrame implements ActionListener
 		    }
 	    }
 
-	// MAJOR DEMO INFO
+	// Gap between college and major demographic panel
+	main.add(Box.createRigidArea(new Dimension(0,15)));
+	
 
+	// MAJOR DEMO INFO
+	JPanel majorTagPanel = new JPanel();
+        majorTagPanel.setLayout(new BoxLayout(majorTagPanel,BoxLayout.LINE_AXIS));
+	JLabel majorText = new JLabel("Major Info:");
+
+        majorTagPanel.add(Box.createRigidArea(new Dimension(20,0))); // Left Gap
+        majorTagPanel.add(majorText);
+	main.add(majorTagPanel);
+	
+	// Get each major and add them as a horizontal panel
+	int[] majorCount = record.getMajorCount();
+	for(int i = 0; i < majorCount.length(); i++)
+	    {
+		if(majorCount[i] != 0)
+		    {
+			// Gap above each major
+			main.add(Box.createRigidArea(new Dimension(0,5)));
+			
+			
+			JPanel majorPanel = new JPanel();
+			majorPanel.setLayout(new BoxLayout(majorPanel,BoxLayout.LINE_AXIS));
+		        majorPanel.add(Box.createRigidArea(new Dimension(30,0))); // Left Gap
+			
+			// Each switch case matches the same switch structure in the Vote class
+			switch(i)
+			    {
+			    case 0:
+				JLabel major = new JLabel("Computer Science");
+				JLabel mCount = new JLabel("-- Count: " + collegeCount[i]);
+
+				majorPanel.add(major);
+				majorPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
+				majorPanel.add(mCount);
+				break;
+				
+			    case 1:
+			        JLabel major = new JLabel("Electrical Engineering");
+				JLabel mCount = new JLabel("-- Count: " + collegeCount[i]);
+
+				majorPanel.add(major);
+				majorPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
+				majorPanel.add(mCount);
+				break;
+
+			    case 2:
+				JLabel major = new JLabel("Computer Engineering");
+				JLabel mCount = new JLabel("-- Count: " + collegeCount[i]);
+
+				majorPanel.add(major);
+				majorPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
+				majorPanel.add(mCount);
+				break;
+
+			    case 3:
+				JLabel major = new JLabel("Business");
+				JLabel mCount = new JLabel("-- Count: " + collegeCount[i]);
+
+				majorPanel.add(major);
+				majorPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
+				majorPanel.add(mCount);
+				break;
+
+			    case 4:
+				JLabel major = new JLabel("Art History");
+				JLabel mCount = new JLabel("-- Count: " + collegeCount[i]);
+
+				majorPanel.add(major);
+				majorPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
+				majorPanel.add(mCount);
+				break;
+				
+			    default:
+				JLabel major = new JLabel("Unrecognized");
+				JLabel mCount = new JLabel("-- Count: " + collegeCount[i]);
+
+				majorPanel.add(major);
+				majorPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
+				majorPanel.add(mCount);
+				break;
+			    }
+
+			main.add(majorPanel);
+		    }
+	    }
+
+	// Gap between major and rank demographic panel
+	main.add(Box.createRigidArea(new Dimension(0,15)));
 
 
 	// CLASS RANK DEMO INO
+	JPanel rankTagPanel = new JPanel();
+        rankTagPanel.setLayout(new BoxLayout(rankTagPanel,BoxLayout.LINE_AXIS));
+	JLabel rankText = new JLabel("Class Rank Info:");
 
+        rankTagPanel.add(Box.createRigidArea(new Dimension(20,0))); // Left Gap
+        rankTagPanel.add(rankText);
+	main.add(rankTagPanel);
+	
+	// Get each rank and add them as a horizontal panel
+	int[] rankCount = record.getRankCount();
+	for(int i = 0; i < rankCount.length(); i++)
+	    {
+		if(rankCount[i] != 0)
+		    {
+			// Gap above each rank
+			main.add(Box.createRigidArea(new Dimension(0,5)));
+			
+			
+			JPanel rankPanel = new rankPanel();
+			rankPanel.setLayout(new BoxLayout(rankPanel,BoxLayout.LINE_AXIS));
+		        rankPanel.add(Box.createRigidArea(new Dimension(30,0))); // Left Gap
+			
+			// Each switch case matches the same switch structure in the Vote class
+			switch(i)
+			    {
+			    case 0:
+				JLabel rank = new JLabel("Freshman");
+				JLabel rCount = new JLabel("-- Count: " + collegeCount[i]);
+
+			        rankPanel.add(rank);
+				rankPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
+				rankPanel.add(rCount);
+				break;
+				
+			    case 1:
+			        JLabel rank = new JLabel("Sophomore");
+				JLabel rCount = new JLabel("-- Count: " + collegeCount[i]);
+
+			        rankPanel.add(rank);
+				rankPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
+				rankPanel.add(rCount);
+				break;
+
+			    case 2:
+			        JLabel rank = new JLabel("Junior");
+				JLabel rCount = new JLabel("-- Count: " + collegeCount[i]);
+
+			        rankPanel.add(rank);
+				rankPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
+				rankPanel.add(rCount);
+				break;
+
+			    case 3:
+			        JLabel rank = new JLabel("Senior");
+				JLabel rCount = new JLabel("-- Count: " + collegeCount[i]);
+
+			        rankPanel.add(rank);
+				rankPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
+				rankPanel.add(rCount);
+				break;
+				
+			    default:
+			        JLabel rank = new JLabel("Unrecognized");
+				JLabel rCount = new JLabel("-- Count: " + collegeCount[i]);
+
+			        rankPanel.add(rank);
+				rankPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
+				rankPanel.add(rCount);
+				break;
+			    }
+
+			main.add(rankPanel);
+		    }
+	    }
+
+	// Gap between rank and undergrad demographic panel
+	main.add(Box.createRigidArea(new Dimension(0,15)));
 
 	
 	// UNDERGRAD DEMO INFO
+	JPanel uTagPanel = new JPanel();
+        uTagPanel.setLayout(new BoxLayout(uTagPanel,BoxLayout.LINE_AXIS));
+	JLabel uText = new JLabel("Undergrad Info:");
 
+	uTagPanel.add(Box.createRigidArea(new Dimension(20,0))); // Left Gap
+	uTagPanel.add(uText);
+	main.add(uTagPanel);
+	
+	// Get each college and add them as a horizontal panel
+	int[] underCount = record.getUndergradCount();
+	
+	JPanel underPanel = new JPanel();
+	underPanel.setLayout(new BoxLayout(underPanel,BoxLayout.LINE_AXIS));
+	JLabel under = new JLabel("Undergrad");
+	JLabel uCount = new JLabel("-- Count: " + underCount[0]);
+
+	main.add(Box.createRigidArea(new Dimension(0,5)));
+	underPanel.add(Box.createRigidArea(new Dimension(30,0))); // Left Gap
+	underPanel.add(under);
+	underPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
+	underPanel.add(uCount);
+	main.add(underPanel);
+
+	JPanel gradPanel = new JPanel();
+        gradPanel.setLayout(new BoxLayout(gradPanel,BoxLayout.LINE_AXIS));
+	JLabel grad = new JLabel("Graduate");
+	JLabel gradCount = new JLabel("-- Count: " + underCount[1]);
+
+	main.add(Box.createRigidArea(new Dimension(0,5)));
+        gradPanel.add(Box.createRigidArea(new Dimension(30,0))); // Left Gap
+        gradPanel.add(grad);
+        gradPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
+        gradPanel.add(gradCount);
+	main.add(gradPanel);
+
+
+	// Gap between undergrad and registration demographic panel
+	main.add(Box.createRigidArea(new Dimension(0,15)));
 
 
 	// REGISTERED STUDENT DEMO INFO
+        JPanel rTagPanel = new JPanel();
+        rTagPanel.setLayout(new BoxLayout(rTagPanel,BoxLayout.LINE_AXIS));
+	JLabel rText = new JLabel("Registration Info:");
+
+	rTagPanel.add(Box.createRigidArea(new Dimension(20,0))); // Left Gap
+	rTagPanel.add(rText);
+	main.add(rTagPanel);
+	
+	// Get each college and add them as a horizontal panel
+	int[] regCount = record.getRegisteredCount();
+	
+	JPanel regisPanel = new JPanel();
+        regisPanel.setLayout(new BoxLayout(regisPanel,BoxLayout.LINE_AXIS));
+	JLabel regis = new JLabel("Registered");
+	JLabel regisCount = new JLabel("-- Count: " + regCount[0]);
+
+	main.add(Box.createRigidArea(new Dimension(0,5)));
+        regisPanel.add(Box.createRigidArea(new Dimension(30,0))); // Left Gap
+        regisPanel.add(regis);
+        regisPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
+        regisPanel.add(regisCount);
+	main.add(regisPanel);
+
+	JPanel unregisPanel = new JPanel();
+        unregisPanel.setLayout(new BoxLayout(unregisPanel,BoxLayout.LINE_AXIS));
+	JLabel unregis = new JLabel("Unregistered");
+	JLabel unregisCount = new JLabel("-- Count: " + regCount[1]);
+
+	main.add(Box.createRigidArea(new Dimension(0,5)));
+        unregisPanel.add(Box.createRigidArea(new Dimension(30,0))); // Left Gap
+        unregisPanel.add(unregis);
+        unregisPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
+        unregisPanel.add(unregisCount);
+	main.add(unregisPanel);
 
 
+	// Gap between registration demographic panel and the HSO prompt
+	main.add(Box.createRigidArea(new Dimension(0,15)));
+	
 
 	// SECTION CONTAINING THE "Formally Accept Results" PROMPT AND THE "Yes", "No", AND "Cancel" BUTTONS
+
+	JLabel prompt = new JLabel("<html>Do you formally accept (certify) or reject this elections results and demographics?</html>");
+	main.add(prompt);
+
+	// Gap between prompt and buttons
+	main.add(Box.createRigidArea(new Dimension(0,10)));
+
+	JPanel ynPanel = new JPanel();
+	ynPanel.setLayout(new BoxLayout(ynPanel,BoxLayout.LINE_AXIS));
+	
+	JButton yButt = new JButton("Yes");
+	yButt.addActionListener(this);
+	yButt.setActionCommand("confirm");
+	
+	JButton nButt = new JButton("No");
+	nButt.addActionListener(this);
+	nButt.setActionCommand("reject");
+
+	ynPanel.add(Box.createRigidArea(new Dimension(100,0)));
+	ynPanel.add(yButt);
+	ynPanel.add(Box.createHorizontalGlue());
+	ynPanel.add(nButt);
+	ynPanel.add(Box.createRigidArea(new Dimension(100,0)));
+	main.add(ynPanel);
+
+	// Gap between yes/no buttons and cancel buttons
+	main.add(Box.createRigidArea(new Dimension(0,5)));
+
+	JPanel canPanel = new JPanel();
+	canPanel.setLayout(new BoxLayout(canPanel,BoxLayout.LINE_AXIS));
+	
+	JButton cButt = new JButton("Cancel");
+	cButt.addActionListener(this);
+	cButt.setActionCommand("cancel");
+
+	canPanel.add(Box.createHorizontalGlue());
+	canPanel.add(cButt);
+	canPanel.add(Box.createHorizontalGlue());
+	main.add(canPanel);
+
+	// Gap after last button
+	main.add(Box.createRigidArea(new Dimension(0,10)));
+
+	JScrollPane scrollList = new JScrollPane(main);
+	scrollList.setAlignmentX(Component.CENTER_ALIGNMENT);
+        add(scrollList);
 	
 
         setSize(500,400);
+	setResizable(false);
+	
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().add(display);
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -319,11 +599,11 @@ class CertifyGUI extends JFrame implements ActionListener
     {
 	if(e.getActionCommand().equals("confirm"))
 	    {
-
+		JOptionPane.showMessageDialog(null,"Results have been officially confirmed","Confirmation",JOptionPane.PLAIN_MESSAGE);
 	    }
 	else if(e.getActionCommand().equals("reject"))
 	    {
-
+		JOptionPane.showMessageDialog(null,"Results have been rejected and the corresponding EC has been notified","Rejection",JOptionPane.ERROR_MESSAGE);
 	    }
 	else if(e.getActionCommand().equals("cancel"))
 	    {
