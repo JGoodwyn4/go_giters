@@ -230,6 +230,11 @@ import java.util.ArrayList;
 		    {
 			new electionListGUI(currentUser,EL);
 		    }
+		else if(e.getActionCommand().equals("logout"))
+		    {
+		        SwingUtilities.getWindowAncestor(this).setVisible(true);
+			this.dispose();
+		    }
 		
 	    }
 	    

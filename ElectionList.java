@@ -59,6 +59,19 @@ public class ElectionList
 
 	return null;
     }
+
+    public void removeElection(int eID)
+    {
+	boolean found = false;
+        for(int i = 0; found != false && i < elections.size(); i++)
+	    {
+		if(elections.get(i).isElection(eID))
+		    {
+		        elections.remove(i);
+			found = true;
+		    }
+	    }
+    }
     
     public int getCount(){
 	return count;
