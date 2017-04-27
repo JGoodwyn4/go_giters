@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.*;
@@ -11,9 +12,24 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 
     private JPanel raceWrap;
     private ArrayList<JPanel> racePanels;
-    //private ArrayList<int> raceIDRecord; // ArrayList that will hold the race ID for each race panel
-    private ArrayList<JPanel> candidatePanels;
+    private ArrayList<Integer> binaryRaceID;
+    //private ArrayList<int> binaryIndex;
+    private ArrayList<Integer> nBinaryRaceID;
+    //private ArrayList<int> nBinaryIndex;
+    private ArrayList<JTextField> binaryName;
+    private ArrayList<JTextArea> binaryPrompt;
+    private ArrayList<JTextField> binaryOP1;
+    private ArrayList<JTextField> binaryOP2;
+    private ArrayList<JTextField> nBinaryName;
+    private ArrayList<JTextField> nBinaryMaxWin;
+    private ArrayList<JTextField> nBinaryMaxPick;
     
+    private ArrayList<JPanel> candidatePanels;
+    private ArrayList<JTextField> candidateName;
+    private ArrayList<JTextField> candidateParty;
+    private ArrayList<String> candidateIDs;
+
+    private JTextField eNameInput;
     private ArrayList<JCheckBox> colCheck;
     private ArrayList<JCheckBox> majorCheck;
     private ArrayList<JCheckBox> rankCheck;
@@ -40,30 +56,35 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 	
 	JPanel eName = new JPanel();
 	eName.setLayout(new BoxLayout(eName,BoxLayout.LINE_AXIS));
-	JLabel eNameLabel = new JLabel("<html><b>Election Name: </b></html>");
-	JTextField eNameInput = new JTextField();
+        JLabel eNameLabel = new JLabel("Election Name: ");
+	eNameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        eNameInput = new JTextField(150);
         eName.add(eNameLabel);
 	eName.add(eNameInput);
-	// Add space between textfield and edge
+        eName.add(Box.createRigidArea(new Dimension(0,10))); // Add space between textfield and edge
 	display.add(eName);
 
 	
 	// Add Space between title and panel
-	display.add(Box.createRigidArea(new Dimension(0,10))); 
+	display.add(Box.createRigidArea(new Dimension(0,15))); 
 
 
-	JLabel eStart = new JLabel("<html><b><i>Election Start:</i></b></html>");
+	JLabel eStart = new JLabel("Election Start:");
+	eStart.setAlignmentX(Component.LEFT_ALIGNMENT);
         display.add(eStart);
 	// Add space below
 
 	JPanel sDate = new JPanel();
 	sDate.setLayout(new BoxLayout(sDate,BoxLayout.LINE_AXIS));
-	JLabel sMonth = new JLabel("<html><b>Month: </b></html>");
-	JLabel sDay = new JLabel("<html><b>Day: </b></html>");
-	JLabel sYear = new JLabel("<html><b>Year: </b></html>");
-	JTextField sMonthInput = new JTextField();
-	JTextField sDayInput = new JTextField();
-	JTextField sYearInput = new JTextField();
+	JLabel sMonth = new JLabel("Month: ");
+	JLabel sDay = new JLabel("Day: ");
+	JLabel sYear = new JLabel("Year: ");
+        sMonth.setAlignmentX(Component.LEFT_ALIGNMENT);
+        sDay.setAlignmentX(Component.LEFT_ALIGNMENT);
+        sYear.setAlignmentX(Component.LEFT_ALIGNMENT);
+	JTextField sMonthInput = new JTextField(2);
+	JTextField sDayInput = new JTextField(2);
+	JTextField sYearInput = new JTextField(4);
 
 	//Glue
         sDate.add(sMonth);
@@ -78,13 +99,16 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 	display.add(sDate);
 
 	// Space between date and time inputs
+	display.add(Box.createRigidArea(new Dimension(0,5)));
 
 	JPanel sTime = new JPanel();
 	sTime.setLayout(new BoxLayout(sTime,BoxLayout.LINE_AXIS));
-	JLabel sHour = new JLabel("<html><b>Hour: </b></html>");
-	JLabel sMinute = new JLabel("<html><b>Minute: </b></html>");
-	JTextField sHourInput = new JTextField();
-	JTextField sMinuteInput = new JTextField();
+	JLabel sHour = new JLabel("Hour: ");
+	JLabel sMinute = new JLabel("Minute: ");
+        sHour.setAlignmentX(Component.LEFT_ALIGNMENT);
+        sMinute.setAlignmentX(Component.LEFT_ALIGNMENT);
+	JTextField sHourInput = new JTextField(2);
+	JTextField sMinuteInput = new JTextField(2);
 
 	//Glue
         sTime.add(sHour);
@@ -97,20 +121,25 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 
 	
 	// Space between start time panels and end time panels
+	display.add(Box.createRigidArea(new Dimension(0,10)));
 
 
-	JLabel eEnd = new JLabel("<html><b><i>Election End:</i></b></html>");
+	JLabel eEnd = new JLabel("Election End:");
+	eEnd.setAlignmentX(Component.LEFT_ALIGNMENT);
         display.add(eEnd);
 	// Add space below
 
 	JPanel eDate = new JPanel();
 	eDate.setLayout(new BoxLayout(eDate,BoxLayout.LINE_AXIS));
-	JLabel eMonth = new JLabel("<html><b>Month: </b></html>");
-	JLabel eDay = new JLabel("<html><b>Day: </b></html>");
-	JLabel eYear = new JLabel("<html><b>Year: </b></html>");
-	JTextField eMonthInput = new JTextField();
-	JTextField eDayInput = new JTextField();
-	JTextField eYearInput = new JTextField();
+	JLabel eMonth = new JLabel("Month: ");
+	JLabel eDay = new JLabel("Day: ");
+	JLabel eYear = new JLabel("Year: ");
+        eMonth.setAlignmentX(Component.LEFT_ALIGNMENT);
+        eDay.setAlignmentX(Component.LEFT_ALIGNMENT);
+        eYear.setAlignmentX(Component.LEFT_ALIGNMENT);
+        JTextField eMonthInput = new JTextField(2);
+	JTextField eDayInput = new JTextField(2);
+	JTextField eYearInput = new JTextField(4);
 
 	//Glue
         eDate.add(eMonth);
@@ -125,33 +154,42 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 	display.add(eDate);
 
 	// Space between date and time inputs
+	display.add(Box.createRigidArea(new Dimension(0,5)));
 
 	JPanel eTime = new JPanel();
 	eTime.setLayout(new BoxLayout(eTime,BoxLayout.LINE_AXIS));
-	JLabel eHour = new JLabel("<html><b>Hour: </b></html>");
-	JLabel eMinute = new JLabel("<html><b>Minute: </b></html>");
-	JTextField eHourInput = new JTextField();
-	JTextField eMinuteInput = new JTextField();
+	JLabel eHour = new JLabel("Hour: ");
+	JLabel eMinute = new JLabel("Minute: ");
+	eHour.setAlignmentX(Component.LEFT_ALIGNMENT);
+	eMinute.setAlignmentX(Component.LEFT_ALIGNMENT);
+	JTextField eHourInput = new JTextField(2);
+	JTextField eMinuteInput = new JTextField(2);
 
 	//Glue
+	//eTime.add(Box.createHorizontalGlue());
         eTime.add(eHour);
 	eTime.add(eHourInput);
 	//Gap
+        //eTime.add(Box.createHorizontalGlue());
 	eTime.add(eMinute);
 	eTime.add(eMinuteInput);
 	//Glue
+        //eTime.add(Box.createHorizontalGlue());
 	display.add(eTime);
 
 
 	// Space between end time panels and the constraint boxes
+	display.add(Box.createRigidArea(new Dimension(0,15)));
 
 
-	JLabel constraintInfo = new JLabel("<html><b><i>For each of the following sections, check each respective boxes for constraints that will be eligible to vote</i></b></html>");
+        JLabel constraintInfo = new JLabel("<html>For each of the following sections, check each respective boxes for constraints that will be eligible to vote</html>");
+        constraintInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
 	display.add(constraintInfo);
 
 	// Gap
 
-	JLabel conColl = new JLabel("<html><b>College Constraints:</b></html>");
+	JLabel conColl = new JLabel("College Constraints:");
+        conColl.setAlignmentX(Component.LEFT_ALIGNMENT);
 	display.add(conColl);
 
 	// Gap
@@ -170,9 +208,11 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 
 	
 	// Space between College constraints and major constraints
+	display.add(Box.createRigidArea(new Dimension(0,10)));
 
 	
-	JLabel conMajor = new JLabel("<html><b>Major Constraints:</b></html>");
+	JLabel conMajor = new JLabel("Major Constraints:");
+        conMajor.setAlignmentX(Component.LEFT_ALIGNMENT);
 	display.add(conMajor);
 
 	// Gap
@@ -203,9 +243,11 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 
 	
 	// Space between major constraints and rank constraints
+	display.add(Box.createRigidArea(new Dimension(0,10)));
 
 	
-	JLabel conRank = new JLabel("<html><b>Class Rank Constraints:</b></html>");
+	JLabel conRank = new JLabel("Class Rank Constraints:");
+        conRank.setAlignmentX(Component.LEFT_ALIGNMENT);
 	display.add(conRank);
 
 	// Gap
@@ -232,9 +274,11 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 
 	
 	// Space between rank constraints and the undergrad constraint
+	display.add(Box.createRigidArea(new Dimension(0,10)));
 
 	
-        JLabel conUndergrad = new JLabel("<html><b>Limit to undergrad students only:</b></html>");
+        JLabel conUndergrad = new JLabel("Limit to undergrad students only:");
+        conUndergrad.setAlignmentX(Component.LEFT_ALIGNMENT);
 	display.add(conUndergrad);
 
 	// Gap
@@ -254,9 +298,11 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 
 	
 	// Space between undergrad constraint and registered constraint
+	display.add(Box.createRigidArea(new Dimension(0,10)));
 
 	
-	JLabel conRegister = new JLabel("<html><b>Limit to registered students only:</b></html>");
+	JLabel conRegister = new JLabel("Limit to registered students only:");
+        conRegister.setAlignmentX(Component.LEFT_ALIGNMENT);
 	display.add(conRegister);
 
 	// Gap
@@ -276,6 +322,7 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 
 	
 	// Space between registered constraint and the race panel(s)
+	display.add(Box.createRigidArea(new Dimension(0,15)));
 
 	
         raceWrap = new JPanel();
@@ -284,10 +331,12 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 	readRacePanels();
 	addRacePanels();
 
+	display.add(raceWrap);
+
 	// Gap
 	
 	JPanel addPanel = new JPanel();
-	addPanel.setLayout(addPanel, BoxLayout.LINE_AXIS);
+	addPanel.setLayout(new BoxLayout(addPanel, BoxLayout.LINE_AXIS));
 	
 	JButton addBinary = new JButton("Add Binary Race");
         addBinary.addActionListener(this);
@@ -320,11 +369,12 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 	// Gap after cancel button
 	display.add(Box.createRigidArea(new Dimension(0,10)));
 
+	//JScrollPane scrollPanel = new JScrollPane(display,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	JScrollPane scrollPanel = new JScrollPane(display);
 	
 
         setSize(500,500);
-        setResizable(false);
+        //setResizable(false);
 	
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().add(scrollPanel);
@@ -339,6 +389,23 @@ public class CreateElectionGUI extends JFrame implements ActionListener
     {
 	racePanels = new ArrayList<JPanel>();
 	candidatePanels = new ArrayList<JPanel>();
+	
+	binaryRaceID = new ArrayList<Integer>();
+	nBinaryRaceID = new ArrayList<Integer>();
+
+	binaryName = new ArrayList<JTextField>();
+	binaryPrompt = new ArrayList<JTextArea>();
+	binaryOP1 = new ArrayList<JTextField>();
+	binaryOP2 = new ArrayList<JTextField>();
+
+	nBinaryName = new ArrayList<JTextField>();
+	nBinaryMaxWin = new ArrayList<JTextField>();
+	nBinaryMaxPick = new ArrayList<JTextField>();
+
+	candidateName = new ArrayList<JTextField>();
+	candidateParty = new ArrayList<JTextField>();
+	candidateIDs = new ArrayList<String>();
+	    
 	ArrayList<Race> raceList = newBallot.getRaceList();
 
 	for(int i = 0; i < raceList.size(); i++)
@@ -350,11 +417,13 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 		if(temp instanceof BinaryRace)
 		    {
 			BinaryRace tempBin = (BinaryRace)temp;
+			binaryRaceID.add(tempBin.getRaceID());
 			
 			JPanel nPanel = new JPanel();
 			nPanel.setLayout(new BoxLayout(nPanel, BoxLayout.LINE_AXIS));
-			JLabel nameTag = new JLabel("<html><b>Binary Race Name: </b></html>");
+			JLabel nameTag = new JLabel("Binary Race Name: ");
 			JTextField nameInput = new JTextField(tempBin.getRaceName());
+			binaryName.add(nameInput);
 
 			nPanel.add(nameTag);
 			nPanel.add(nameInput);
@@ -362,11 +431,12 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 
 			// Space between race name panel and prompt panel
 
-			JLabel promptTag = new JLabel("<html><b>Race Description/Prompt:</b></html>");
+			JLabel promptTag = new JLabel("Race Description/Prompt:");
 			JTextArea promptInput = new JTextArea(tempBin.getPrompt());
 			promptInput.setLineWrap(true);
 			promptInput.setWrapStyleWord(true);
-			JScrollBar promtScroll = new JScrollBar(promptInput);
+			binaryPrompt.add(promptInput);
+			JScrollPane promptScroll = new JScrollPane(promptInput);
 
 			tempPanel.add(promptTag);
 			tempPanel.add(promptScroll);
@@ -375,8 +445,9 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 
 			JPanel opPanel1 = new JPanel();
 			opPanel1.setLayout(new BoxLayout(opPanel1, BoxLayout.LINE_AXIS));
-			JLabel opTag1 = new JLabel("<html><b>Option 1 Name: </b></html>");
+			JLabel opTag1 = new JLabel("Option 1 Name: ");
 			JTextField opInput1 = new JTextField(tempBin.get_op1());
+			binaryOP1.add(opInput1);
 
 			opPanel1.add(opTag1);
 			opPanel1.add(opInput1);
@@ -386,8 +457,9 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 
 			JPanel opPanel2 = new JPanel();
 			opPanel2.setLayout(new BoxLayout(opPanel2, BoxLayout.LINE_AXIS));
-			JLabel opTag2 = new JLabel("<html><b>Option 2 Name: </b></html>");
+			JLabel opTag2 = new JLabel("Option 2 Name: ");
 			JTextField opInput2 = new JTextField(tempBin.get_op2());
+			binaryOP2.add(opInput2);
 
 			opPanel2.add(opTag2);
 			opPanel2.add(opInput2);
@@ -403,16 +475,35 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 		    }
 		else if(temp instanceof NonBinaryRace)
 		    {
-		        NonBinaryRace tempNonBin = (NonBinaryRace)temp;
+		        NonBinaryRace tempNon = (NonBinaryRace)temp;
+			nBinaryRaceID.add(tempNon.getRaceID());
 
 			JPanel nPanel = new JPanel();
 			nPanel.setLayout(new BoxLayout(nPanel, BoxLayout.LINE_AXIS));
-			JLabel nameTag = new JLabel("<html><b>Binary Race Name: </b></html>");
-			JTextField nameInput = new JTextField(tempBin.getRaceName());
+			JLabel nameTag = new JLabel("Non-Binary Race Name: ");
+			JTextField nameInput = new JTextField(tempNon.getRaceName());
+			nBinaryName.add(nameInput);
 
 			nPanel.add(nameTag);
 			nPanel.add(nameInput);
 			tempPanel.add(nPanel);
+
+			// Add some space here
+
+			JPanel maxPanel = new JPanel();
+		        maxPanel.setLayout(new BoxLayout(maxPanel, BoxLayout.LINE_AXIS));
+			JLabel winTag = new JLabel("Number of winners: ");
+			JLabel pickTag = new JLabel("Max number voter can select: ");
+			JTextField winInput = new JTextField(tempNon.getNumWinners() + "");
+			JTextField pickInput = new JTextField(tempNon.getMaxChoices() + "");
+			nBinaryMaxWin.add(winInput);
+			nBinaryMaxPick.add(pickInput);
+
+			maxPanel.add(winTag);
+			maxPanel.add(winInput);
+			maxPanel.add(pickTag);
+			maxPanel.add(pickInput);
+			tempPanel.add(maxPanel);
 
 			// Space between race name panel and candidate panel
 
@@ -422,20 +513,22 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 			canPanel.setLayout(new BoxLayout(canPanel,BoxLayout.PAGE_AXIS));
 			candidatePanels.add(canPanel);
 
-			addCandidates(tempNonBin.getRaceID(),canPanel,canPanelID);
+			addCandidates(tempNon.getRaceID(),canPanel,canPanelID);
+
+			tempPanel.add(canPanel);
 
 			// Small space between candidate panel and the add candidate button
 
 			JButton addCan = new JButton("Add a Candidate");
 			addCan.addActionListener(this);
-			addCan.setActionCommand("addCan," + tempNonBin.getRaceID() + "," + canPanelID);
-			candidatePanels.add(addCan);
+			addCan.setActionCommand("addCan," + tempNon.getRaceID() + "," + canPanelID);
+			tempPanel.add(addCan);
 			
 			// Space between candidate button and remove race button
 
 			JButton remRace = new JButton("Remove Race");
 			remRace.addActionListener(this);
-			remRace.setActionCommand("removeRace," + tempBin.getRaceID());
+			remRace.setActionCommand("removeRace," + tempNon.getRaceID());
 
 			tempPanel.add(remRace);
 		    }
@@ -446,6 +539,7 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 
     private void updateRacePanels()
     {
+	System.out.println("Update Called");
 	raceWrap.removeAll();
 	
 	readRacePanels();
@@ -459,6 +553,7 @@ public class CreateElectionGUI extends JFrame implements ActionListener
     {
 	for(JPanel rPanelTemp : racePanels)
 	    {
+		System.out.println("Added Race!");
 		// Gap used to space out each panel
 	        raceWrap.add(Box.createRigidArea(new Dimension(0,5)));
 		
@@ -469,9 +564,21 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 	    }
     }
 
+    /*
+    private void newBinaryRace()
+    {
+	
+    }
+
+    private void newNonBinaryRace()
+    {
+	
+    }
+    */
+
     private void addCandidates(int raceID, JPanel candidatePanel, int panelIndex)
     {
-	ArrayList<Candidates> canList = ((NonBinaryRace)newBallot.getRace(raceID)).getCandidates();
+	ArrayList<Candidates> canList = ((NonBinaryRace)(newBallot.getRace(raceID))).getCandidates();
 
 	// Starts at 1 to skip the "None of the above" candidate option
 	for(int i = 1; i < canList.size(); i++)
@@ -483,13 +590,17 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 		
 		JPanel candidate = new JPanel();
 		candidate.setLayout(new BoxLayout(candidate, BoxLayout.LINE_AXIS));
-		JLabel canName = new JLabel("<html><b>Candidate Name: </b></html>");
-		JLabel canParty = new JLabel("<html><b>-- Party: </b></html>");
+		JLabel canName = new JLabel("Candidate Name: ");
+		JLabel canParty = new JLabel("-- Party: ");
 		JTextField canInput = new JTextField(temp.getName());
 		JTextField canPartyInput = new JTextField(temp.getParty());
 		JButton canRem = new JButton("X");
 		canRem.addActionListener(this);
 		canRem.setActionCommand("removeCan," + temp.getID() + "," + raceID + "," + panelIndex);
+
+		candidateName.add(canInput);
+		candidateParty.add(canPartyInput);
+		candidateIDs.add(raceID + "," + temp.getID());
 
 		// Gap between edge and first label
 		candidate.add(canName);
@@ -513,17 +624,73 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 	candidatePanel.repaint();
     }
 
+    public void recordRaceText(int skipID)
+    {
+	boolean skipFound = false;
+        // Go through all binary ID's/arraylists
+	for(int i = 0; i < binaryRaceID.size(); i++)
+	    {
+		if(skipFound == true || binaryRaceID.get(i).intValue() != skipID)
+		    {
+			BinaryRace bRace = (BinaryRace)(newBallot.getRace(binaryRaceID.get(i).intValue()));
+			bRace.setRaceName(binaryName.get(i).getText());
+			bRace.setPrompt(binaryPrompt.get(i).getText());
+			bRace.set_op1(binaryOP1.get(i).getText());
+			bRace.set_op2(binaryOP2.get(i).getText());
+		    }
+		else
+		    skipFound = true;
+	    }
+
+	// Go through all nonbinary ID's/arrayLists
+	for(int i = 0; i < nBinaryRaceID.size(); i++)
+	    {
+		if(skipFound == true || nBinaryRaceID.get(i).intValue() != skipID)
+		    {
+			NonBinaryRace nbRace = (NonBinaryRace)(newBallot.getRace(nBinaryRaceID.get(i).intValue()));
+			nbRace.setRaceName(nBinaryName.get(i).getText());
+			nbRace.setNumWinners(Integer.parseInt(nBinaryMaxWin.get(i).getText()));
+			nbRace.setMaxChoices(Integer.parseInt(nBinaryMaxPick.get(i).getText()));
+
+			// Go to candidate update method
+			recordCandidateText(skipID);
+		    }
+		else
+		    skipFound = true;
+	    }
+    }
+
+    public void recordCandidateText(int skipID)
+    {
+	for(int i = 0; i < candidateIDs.size(); i++)
+	    {
+		String[] splitCan = candidateIDs.get(i).split(",");
+		int rID = Integer.parseInt(splitCan[0]);
+		int cID = Integer.parseInt(splitCan[1]);
+
+		if(rID != skipID)
+		    {
+			Candidates tempCan = ((NonBinaryRace)(newBallot.getRace(rID))).getCandidate(cID);
+
+			tempCan.setName(candidateName.get(i).getText());
+			tempCan.setParty(candidateParty.get(i).getText());
+		    }
+	    }
+    }
+
     public void actionPerformed(ActionEvent e)
     {
-	String command = e.getActionCommand();
+        String command = e.getActionCommand();
 	if(command.equals("addBinary"))
 	    {
-	        mainBallot.addBinaryRace();
+	        newBallot.addBinaryRace();
+		recordRaceText(-1);
 		updateRacePanels();
 	    }
-	else if(command.equals("addNonbinary"))
+	else if(command.equals("addNonBinary"))
 	    {
-	        mainBallot.addNonBinaryRace();
+	        newBallot.addNonBinaryRace();
+		recordRaceText(-1);
 		updateRacePanels();
 	    }
 	else if(command.equals("cancelElection"))
@@ -534,6 +701,42 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 	    {
 		// Ask for confirmation
 		// do appropriate get/set methods for all the data
+
+		newElection.setName(eNameInput.getText());
+
+		ArrayList<String> colCons = new ArrayList<String>();
+		for(JCheckBox cCheck : colCheck)
+		    {
+			if(cCheck.isSelected())
+			    colCons.add(cCheck.getActionCommand());
+		    }
+
+		ArrayList<String> mCons = new ArrayList<String>();
+		for(JCheckBox mCheck : majorCheck)
+		    {
+			if(mCheck.isSelected())
+			    mCons.add(mCheck.getActionCommand());
+		    }
+
+		ArrayList<String> rCons = new ArrayList<String>();
+		for(JCheckBox rCheck : rankCheck)
+		    {
+			if(rCheck.isSelected())
+			    rCons.add(rCheck.getActionCommand());
+		    }
+
+		Boolean underCons = Boolean.parseBoolean(undergradCheck.getSelection().getActionCommand());
+		Boolean regisCons = Boolean.parseBoolean(registerCheck.getSelection().getActionCommand());
+
+		newBallot.setCollegeConstraints(colCons);
+		newBallot.setMajorConstraints(mCons);
+		newBallot.setClassConstraints(rCons);
+		newBallot.setUndergradConstraints(underCons);
+		newBallot.setRegistrationConstraints(regisCons);
+
+		recordRaceText(-1);
+
+		electionList.addElection(newElection);
 	    }
 	else
 	    {
@@ -542,7 +745,9 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 		if(panelCommands[0].equals("removeRace"))
 		    {
 			int rID = Integer.parseInt(panelCommands[1]);
-			mainBallot.removeRace(rID);
+			recordRaceText(rID);
+			
+			newBallot.removeRace(rID);
 
 			updateRacePanels();
 		    }
@@ -551,26 +756,28 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 			int cID = Integer.parseInt(panelCommands[1]);
 			int rID = Integer.parseInt(panelCommands[2]);
 			int panIndex = Integer.parseInt(panelCommands[3]);
+			recordCandidateText(-1);
 
-			((NonBinaryRace)(mainBallot.getRace(rID))).removeCandidate(cID);
-			updateCandidatePanels(rID,candidatePanels.get(panIndex),panIndex);
+			((NonBinaryRace)(newBallot.getRace(rID))).removeCandidate(cID);
+			updateCandidates(rID,candidatePanels.get(panIndex),panIndex);
 		    }
 		else if(panelCommands[0].equals("addCan"))
 		    {
 			int rID = Integer.parseInt(panelCommands[1]);
 			int panIndex = Integer.parseInt(panelCommands[2]);
 
-			((NonBinaryRace)(mainBallot.getRace(rID))).addCandidate();
-			updateCandidatePanels(rID,candidatePanels.get(panIndex),panIndex);
+			((NonBinaryRace)(newBallot.getRace(rID))).addCandidate();
+			updateCandidates(rID,candidatePanels.get(panIndex),panIndex);
 		    }
 	    }
     }
 
-    
+    /*
     public static void main(String[] args)
     {
 	ElectionList temp = new ElectionList();
 	new CreateElectionGUI("TestUser",temp);
     }
+    */
     
 }

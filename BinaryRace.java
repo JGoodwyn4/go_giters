@@ -17,7 +17,7 @@ public class BinaryRace extends Race {
 	this.op2 = "no";
 	VoteCounter vc1 = new VoteCounter(1,raceID,ballotID,electionID);
 	VoteCounter vc2 = new VoteCounter(2,raceID,ballotID,electionID);
-	prompt="";
+	prompt = "";
     }
     
     public void set_op1(String op1) { this.op1 = op1; }
@@ -50,8 +50,7 @@ public class BinaryRace extends Race {
     
    
 
-   public String getPrompt() {
-     return prompt;
-    }
+    public String getPrompt() { return prompt; }
+    public void setPrompt(String nPrompt) { prompt = nPrompt; }
     
 }

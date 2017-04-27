@@ -1,14 +1,4 @@
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author najeeullah.williams
- */
 import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.*;
@@ -411,7 +401,6 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 			JButton remRace = new JButton("Remove Race");
 			remRace.addActionListener(this);
 			remRace.setActionCommand("removeRace," + tempBin.getRaceID());
-			remRace.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 			tempPanel.add(remRace);
 		    }
@@ -443,7 +432,6 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 			JButton addCan = new JButton("Add a Candidate");
 			addCan.addActionListener(this);
 			addCan.setActionCommand("addCan," + tempNonBin.getRaceID() + "," + canPanelID);
-			addCan.setAlignmentX(Component.CENTER_ALIGNMENT);
 			tempPanel.add(addCan);
 			
 			// Space between candidate button and remove race button
@@ -451,7 +439,6 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 			JButton remRace = new JButton("Remove Race");
 			remRace.addActionListener(this);
 			remRace.setActionCommand("removeRace," + tempNonBin.getRaceID());
-			remRace.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 			tempPanel.add(remRace);
 		    }
@@ -531,19 +518,55 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 
     public void actionPerformed(ActionEvent e)
     {
-	if(e.getActionCommand().equals("closeEC"))
+        String command = e.getActionCommand();
+	if(command.equals("addBinary"))
 	    {
-	        this.dispose();
+	        mainBallot.addBinaryRace();
+		updateRacePanels();
 	    }
-	else if(e.getActionCommand().equals("addEC"))
+	else if(command.equals("addNonbinary"))
 	    {
-
+	        mainBallot.addNonBinaryRace();
+		updateRacePanels();
+	    }
+	else if(command.equals("cancelElection"))
+	    {
+		this.dispose();
+	    }
+	else if(command.equals("subElection"))
+	    {
+		// Ask for confirmation
+		// do appropriate get/set methods for all the data
 	    }
 	else
 	    {
-	
-		    
-            }
+	        String[] panelCommands = command.split(",");
+
+		if(panelCommands[0].equals("removeRace"))
+		    {
+			int rID = Integer.parseInt(panelCommands[1]);
+			mainBallot.removeRace(rID);
+
+			updateRacePanels();
+		    }
+		else if(panelCommands[0].equals("removeCan"))
+		    {
+			int cID = Integer.parseInt(panelCommands[1]);
+			int rID = Integer.parseInt(panelCommands[2]);
+			int panIndex = Integer.parseInt(panelCommands[3]);
+
+			((NonBinaryRace)(mainBallot.getRace(rID))).removeCandidate(cID);
+			updateCandidatePanels(rID,candidatePanels.get(panIndex),panIndex);
+		    }
+		else if(panelCommands[0].equals("addCan"))
+		    {
+			int rID = Integer.parseInt(panelCommands[1]);
+			int panIndex = Integer.parseInt(panelCommands[2]);
+
+			((NonBinaryRace)(mainBallot.getRace(rID))).addCandidate();
+			updateCandidatePanels(rID,candidatePanels.get(panIndex),panIndex);
+		    }
+	    }
     }
 
     

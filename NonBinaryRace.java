@@ -8,16 +8,22 @@ public class NonBinaryRace extends Race{
     private ArrayList<Candidates> candidates;
     private int numWinners;
     private int maxChoices;
+    private int count;
 
     
     public NonBinaryRace(int raceID, int ballotID, int electionID) {
-	super( raceID, ballotID, electionID);
+	super(raceID, ballotID, electionID);
 	this.candidates = new ArrayList<Candidates>();
 	this.numWinners = 1;
 	this.maxChoices = 1;
+	count = 1;
+
+	Candidates temp = new Candidates(0,raceID,ballotID,electionID);
+	temp.setName("None of the above");
+	candidates.add(temp);
     }
     
-    public void setNumWiners(int numWinners){
+    public void setNumWinners(int numWinners){
 	this.numWinners = numWinners;
     }
     
@@ -36,9 +42,27 @@ public class NonBinaryRace extends Race{
     public void addCandidate(Candidates candidate){
 	candidates.add(candidate);
     }
+
+    public void addCandidate(){
+	candidates.add(new Candidates(count,0,0,0));
+	count++;
+    }
     
     public void removeCandidate(Candidates candidate){
 	if(candidates.contains(candidate)) candidates.remove(candidate);
+    }
+
+    public void removeCandidate(int id)
+    {
+	boolean found = false;
+	for(int i = 1; found != true && i < candidates.size(); i++)
+	    {
+		if((candidates.get(i)).matchID(id))
+		    {
+			candidates.remove(i);
+			found = true;
+		    }
+	    }
     }
     
     public int numCandidates(){
@@ -47,6 +71,16 @@ public class NonBinaryRace extends Race{
     
     public ArrayList<Candidates> getCandidates(){
         return candidates;
+    }
+
+    public Candidates getCandidate(int cID)
+    {
+	for(int i = 1; i < candidates.size(); i++)
+	    {
+		if(candidates.get(i).matchID(cID))
+		    return candidates.get(i);
+	    }
+	return null;
     }
     
     public ArrayList<Candidates> orderedWinners()

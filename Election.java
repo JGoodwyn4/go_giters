@@ -21,8 +21,7 @@ public class Election
     
 
     // Constructor
-    Election(){}
-    Election( String ECUser, int id)
+    Election(String ECUser, int id)
     {
         electionName = "";
 	
@@ -61,11 +60,8 @@ public class Election
 
     
 
-    // Returns a ballot given it's specific ID
-    public Ballot getBallot()//int ballotID)
+    public Ballot getBallot()
     {
-	
-
 	return mainBallot;
     }
 

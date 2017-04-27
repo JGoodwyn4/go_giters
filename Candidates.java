@@ -3,17 +3,23 @@
 
 public class Candidates {
 
-	private int choiceID;
-	private String name;
-	private String party;
-	private VoteCounter vc;
+    private int choiceID;
+    private int raceID;
+    private int ballotID;
+    private int electionID;
+    private String name;
+    private String party;
+    private VoteCounter vc;
 	
 	
-	public Candidates(int choiceID, String name, String party){
-		this.choiceID = choiceID;
-		this.name = name;
-		this.party = party;
-		VoteCounter vc = new VoteCounter( choiceID);
+    public Candidates(int cID,int rID,int bID,int eID){
+	        choiceID = cID;
+		raceID = rID;
+		ballotID = bID;
+		electionID = eID;
+	        name = "";
+	        party = "";
+		VoteCounter vc = new VoteCounter(cID,rID,bID,eID);
 	}
 	public void get(){
             
@@ -52,8 +58,7 @@ public class Candidates {
 	}
 	
 	public boolean matchID(int id){
-		if(this.choiceID == id) return true;
-		return false;
+	    return choiceID == id;
 	}
 	
 }

@@ -23,7 +23,7 @@ public class Ballot
 	electionID = eID;
 	ballotID = bID;
 	raceList = new ArrayList<Race>();
-        Bcounter =0;
+        Bcounter = 0;
     }
 
     public ArrayList<String> getCollegeConstraints() { return collegeCons; }
@@ -94,7 +94,7 @@ public class Ballot
     // Add in data/parameters
     public void addBinaryRace()
     {
-	raceList.add(new BinaryRace(Bcounter, ballotID, electionID ));
+	raceList.add(new BinaryRace(Bcounter, ballotID, electionID));
         Bcounter++;
     }
 
@@ -107,7 +107,16 @@ public class Ballot
 
     public void removeRace(int raceID)
     {
-	
+	boolean found = false;
+	for(int i = 0; found != true && i < raceList.size(); i++)
+	    {
+		if(raceList.get(i).matchID(raceID))
+		    {
+			raceList.remove(i);
+			found = true;
+		    }
+           
+	    }
     }
 
     public Race getRace(int raceID)
