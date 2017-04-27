@@ -212,7 +212,9 @@ public class VotingSoftware implements ActionListener{
 		btnVote.setBounds(108, 17, 80, 21);
 		btnVote.setFont(new Font("Times New Roman", Font.PLAIN, 11));
 		
-		JMenuItem mntmCreateBallot = new JMenuItem("Create Ballot");
+		JMenuItem mntmCreateBallot = new JMenuItem("Create Election");
+		mntmCreateBallot.setActionCommand("createBallot");
+		mntmCreateBallot.addActionListener(this);
 		mntmCreateBallot.setFont(new Font("Times New Roman", Font.PLAIN, 12));
 		toolBar_1.add(mntmCreateBallot);
 		
@@ -440,28 +442,28 @@ public class VotingSoftware implements ActionListener{
 				if (currentUser.isEC()){
 				    currentUser = new ElectionCommissioner(currentUser);
                                     
-				    //ECFrame.setVisible(true);
+				    ECFrame.setVisible(true);
 				    LogFrame.setVisible(false);
 
-				    new ECGUI(EL,currentUser);
+				    //new ECGUI(EL,currentUser);
                                     
 				}
                                 
                                 
 				else if (currentUser.isHSO()){
 				    LogFrame.setVisible(false);
-				    //HSOFrame.setVisible(true);
+				    HSOFrame.setVisible(true);
 
-				    new HSOGUI(EL,currentUser);
+				    //new HSOGUI(EL,currentUser);
                                     
 				}
 				else
 				    { 
 					currentUser = new Student(currentUser);
-					//StudentFrame.setVisible(true);
+					StudentFrame.setVisible(true);
 					LogFrame.setVisible(false);
 
-					new StudentGUI(EL,currentUser);
+					//new StudentGUI(EL,currentUser);
 				    }
 				
 			    }
@@ -472,21 +474,21 @@ public class VotingSoftware implements ActionListener{
 		    } 
 	    }
 	
-	if(e.getActionCommand().equals("logout")){
+	else if(e.getActionCommand().equals("logout")){
 	    ECFrame.setVisible(false);
 	    LogFrame.setVisible(true);
 	    HSOFrame.setVisible(false);
             
 	} 
         
-	if(e.getActionCommand().equals("DQ")){
+	else if(e.getActionCommand().equals("DQ")){
 	    
             
 	    DQFrame.setVisible(true);
 	    LogFrame.setVisible(false);
             
 	}
-	if(e.getActionCommand().equals("Recount")){
+	else if(e.getActionCommand().equals("Recount")){
 	    
             
 	    Recount.setVisible(true);
@@ -494,31 +496,35 @@ public class VotingSoftware implements ActionListener{
             
             
 	}
-	if(e.getActionCommand().equals("ManageEC")){
+	else if(e.getActionCommand().equals("ManageEC")){
 	    
             
 	    new ManageECGUI();
             
 	}
-	if(e.getActionCommand().equals("Certify")){
+	else if(e.getActionCommand().equals("Certify")){
 	    
             
-	    // new CertifyGUI();
+	    new CertifyGUI(EL.getElection(0));
             
 	}
 	
-	if(e.getActionCommand().equals("RYes"))
+	else if(e.getActionCommand().equals("RYes"))
 	    {     
 		
                 JOptionPane.showMessageDialog(null,"Recount was Successful","Success",JOptionPane.PLAIN_MESSAGE);
 		
             }
-	if(e.getActionCommand().equals("Rno"))
+	else if(e.getActionCommand().equals("Rno"))
 	    {     
 		
                 Recount.dispose();
                 
             }
+	else if(e.getActionCommand().equals("createBallot"))
+	    {
+		new CreateElectionGUI(currentUser.getUsername(),EL);
+	    }
 	
         
         
