@@ -11,7 +11,7 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 
     private JPanel raceWrap;
     private ArrayList<JPanel> racePanels;
-    private ArrayList<int> raceIDRecord; // ArrayList that will hold the race ID for each race panel
+    //private ArrayList<int> raceIDRecord; // ArrayList that will hold the race ID for each race panel
     private ArrayList<JPanel> candidatePanels;
     
     private ArrayList<JCheckBox> colCheck;
@@ -398,7 +398,6 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 			JButton remRace = new JButton("Remove Race");
 			remRace.addActionListener(this);
 			remRace.setActionCommand("removeRace," + tempBin.getRaceID());
-			remRace.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 			tempPanel.add(remRace);
 		    }
@@ -430,7 +429,6 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 			JButton addCan = new JButton("Add a Candidate");
 			addCan.addActionListener(this);
 			addCan.setActionCommand("addCan," + tempNonBin.getRaceID() + "," + canPanelID);
-			addCan.setAlignmentX(Component.CENTER_ALIGNMENT);
 			candidatePanels.add(addCan);
 			
 			// Space between candidate button and remove race button
@@ -438,7 +436,6 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 			JButton remRace = new JButton("Remove Race");
 			remRace.addActionListener(this);
 			remRace.setActionCommand("removeRace," + tempBin.getRaceID());
-			remRace.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 			tempPanel.add(remRace);
 		    }
@@ -468,7 +465,7 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 	        raceWrap.add(rPanelTemp);
 
 		// Gap used to space out each panel
-	        ecContainer.add(Box.createRigidArea(new Dimension(0,5)));
+	        raceWrap.add(Box.createRigidArea(new Dimension(0,5)));
 	    }
     }
 
@@ -518,31 +515,62 @@ public class CreateElectionGUI extends JFrame implements ActionListener
 
     public void actionPerformed(ActionEvent e)
     {
-	if(e.getActionCommand().equals("closeEC"))
+	String command = e.getActionCommand();
+	if(command.equals("addBinary"))
 	    {
-	        this.dispose();
+	        mainBallot.addBinaryRace();
+		updateRacePanels();
 	    }
-	else if(e.getActionCommand().equals("addEC"))
+	else if(command.equals("addNonbinary"))
 	    {
-		new ecDialog();
+	        mainBallot.addNonBinaryRace();
+		updateRacePanels();
+	    }
+	else if(command.equals("cancelElection"))
+	    {
+		this.dispose();
+	    }
+	else if(command.equals("subElection"))
+	    {
+		// Ask for confirmation
+		// do appropriate get/set methods for all the data
 	    }
 	else
 	    {
-		int choice = JOptionPane.showConfirmDialog(null,"Are you sure you want to remove the user: " + e.getActionCommand() + " ?","Confirmation",JOptionPane.YES_NO_OPTION);
-		
-		if(choice == JOptionPane.YES_OPTION)
+	        String[] panelCommands = command.split(",");
+
+		if(panelCommands[0].equals("removeRace"))
 		    {
-			holder.removeEC(e.getActionCommand());
-			updateList();
+			int rID = Integer.parseInt(panelCommands[1]);
+			mainBallot.removeRace(rID);
+
+			updateRacePanels();
+		    }
+		else if(panelCommands[0].equals("removeCan"))
+		    {
+			int cID = Integer.parseInt(panelCommands[1]);
+			int rID = Integer.parseInt(panelCommands[2]);
+			int panIndex = Integer.parseInt(panelCommands[3]);
+
+			((NonBinaryRace)(mainBallot.getRace(rID))).removeCandidate(cID);
+			updateCandidatePanels(rID,candidatePanels.get(panIndex),panIndex);
+		    }
+		else if(panelCommands[0].equals("addCan"))
+		    {
+			int rID = Integer.parseInt(panelCommands[1]);
+			int panIndex = Integer.parseInt(panelCommands[2]);
+
+			((NonBinaryRace)(mainBallot.getRace(rID))).addCandidate();
+			updateCandidatePanels(rID,candidatePanels.get(panIndex),panIndex);
 		    }
 	    }
     }
 
-    /*
+    
     public static void main(String[] args)
     {
 	ElectionList temp = new ElectionList();
 	new CreateElectionGUI("TestUser",temp);
     }
-    */
+    
 }
