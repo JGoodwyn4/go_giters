@@ -349,8 +349,14 @@ public class VotingSoftware implements ActionListener{
 		JPanel Student_panel = new JPanel();
 		StudentFrame.getContentPane().add(Student_panel, "name_14690592761211");
 		
-          
-		
+		JToolBar toolBar_2 = new JToolBar();
+		toolBar_2.setBounds(10, 11, 500, 26);
+
+		JMenuItem mntmLogout_2 = new JMenuItem("Logout");
+                mntmLogout_2.setActionCommand("logout");
+                mntmLogout_2.addActionListener(this);
+		mntmLogout_2.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+		toolBar_2.add(mntmLogout_2);
 	
 		JPanel Student_Election_panel = new JPanel();
 		Student_Election_panel.setBounds(10, 101, 364, 49);
@@ -371,6 +377,7 @@ public class VotingSoftware implements ActionListener{
 		
 		Student_panel.setLayout(null);
 
+		Student_panel.add(toolBar_2);
 		Student_panel.add(Student_Election_panel);
 		Student_Election_panel.setLayout(null);
 		Student_Election_panel.add(SlblElection);
@@ -478,6 +485,7 @@ public class VotingSoftware implements ActionListener{
 	    ECFrame.setVisible(false);
 	    LogFrame.setVisible(true);
 	    HSOFrame.setVisible(false);
+	    StudentFrame.setVisible(false);
             
 	} 
         
