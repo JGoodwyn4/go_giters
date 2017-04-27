@@ -7,11 +7,11 @@ public class Candidates {
 	private VoteCounter vc;
 	
 	
-	public Candidates(int choiceID, String name, String party){
-		this.choiceID = choiceID;
-		this.name = name;
-		this.party = party;
-		VoteCounter vc = new VoteCounter();
+	public Candidates(int cID){
+	        choiceID = cID;
+	        name = "";
+	        party = "";
+		VoteCounter vc = new VoteCounter(cID,0,0,0);
 	}
 	
 	public void setID(int choiceID){

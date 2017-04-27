@@ -1,0 +1,334 @@
+
+
+public class CreateElectionGUI extends JFrame implements ActionListener
+{
+    private Election newElection;
+    private Ballot newBallot;
+
+    private JPanel raceWrap;
+    private ArrayList<JPanel> racePanels;
+    
+    private ArrayList<JCheckBox> colCheck;
+    private ArrayList<JCheckBox> majorCheck;
+    private ArrayList<JCheckBox> rankCheck;
+    private ButtonGroup undergradCheck;
+    private ButtonGroup registerCheck;
+
+    private int raceCount;
+    
+    CreateElectionGUI(String username, ElectionList electionList)
+    {
+	newElection = new Election(electionList.getCount());
+	newBallot = newElection.getBallot();
+	
+	racePanels = new ArrayList<JPanel>();
+	
+	setTitle("Create Election");
+	
+	JPanel display = new JPanel();
+	BoxLayout layout = new BoxLayout(display,BoxLayout.PAGE_AXIS);
+	display.setLayout(layout);
+
+	
+	// Gap used to space out each panel
+        display.add(Box.createRigidArea(new Dimension(0,10)));
+
+	
+	JPanel eName = new JPanel();
+	eName.setLayout(new BoxLayout(eName,BoxLayout.LINE_AXIS));
+	JLabel eNameLabel = new JLabel("<html><b>Election Name:</b></html>");
+	JTextField eNameInput = new JTextField();
+        eName.add(eNameLabel);
+	eName.add(eNameInput);
+	// Add space between textfield and edge
+	display.add(eName);
+
+	
+	// Add Space between title and panel
+	display.add(Box.createRigidArea(new Dimension(0,10))); 
+
+
+	JLabel eStart = new JLabel("<html><b><i>Election Start:</i></b></html>");
+        display.add(eStart);
+	// Add space below
+
+	JPanel sDate = new JPanel();
+	sDate.setLayout(new BoxLayout(sDate,BoxLayout.LINE_AXIS));
+	JLabel sMonth = new JLabel("<html><b>Month:</b></html>");
+	JLabel sDay = new JLabel("<html><b>Day:</b></html>");
+	JLabel sYear = new JLabel("<html><b>Year:</b></html>");
+	JTextField sMonthInput = new JTextField();
+	JTextField sDayInput = new JTextField();
+	JTextField sYearInput = new JTextField();
+
+	//Glue
+        sDate.add(sMonth);
+	sDate.add(sMonthInput);
+	//Gap
+	sDate.add(sDay);
+	sDate.add(sDayInput);
+	//Gap
+	sDate.add(sYear);
+	sDate.add(sYearInput);
+	//Glue
+	display.add(sDate);
+
+	// Space between date and time inputs
+
+	JPanel sTime = new JPanel();
+	sTime.setLayout(new BoxLayout(sTime,BoxLayout.LINE_AXIS));
+	JLabel sHour = new JLabel("<html><b>Hour:</b></html>");
+	JLabel sMinute = new JLabel("<html><b>Minute:</b></html>");
+	JTextField sHourInput = new JTextField();
+	JTextField sMinuteInput = new JTextField();
+
+	//Glue
+        sTime.add(sHour);
+	sTime.add(sHourInput);
+	//Gap
+	sTime.add(sMinute);
+	sTime.add(sMinuteInput);
+	//Glue
+	display.add(sTime);
+
+	
+	// Space between start time panels and end time panels
+
+
+	JLabel eEnd = new JLabel("<html><b><i>Election End:</i></b></html>");
+        display.add(eEnd);
+	// Add space below
+
+	JPanel eDate = new JPanel();
+	eDate.setLayout(new BoxLayout(eDate,BoxLayout.LINE_AXIS));
+	JLabel eMonth = new JLabel("<html><b>Month:</b></html>");
+	JLabel eDay = new JLabel("<html><b>Day:</b></html>");
+	JLabel eYear = new JLabel("<html><b>Year:</b></html>");
+	JTextField eMonthInput = new JTextField();
+	JTextField eDayInput = new JTextField();
+	JTextField eYearInput = new JTextField();
+
+	//Glue
+        eDate.add(eMonth);
+	eDate.add(eMonthInput);
+	//Gap
+	eDate.add(eDay);
+	eDate.add(eDayInput);
+	//Gap
+	eDate.add(eYear);
+	eDate.add(eYearInput);
+	//Glue
+	display.add(eDate);
+
+	// Space between date and time inputs
+
+	JPanel eTime = new JPanel();
+	eTime.setLayout(new BoxLayout(eTime,BoxLayout.LINE_AXIS));
+	JLabel eHour = new JLabel("<html><b>Hour:</b></html>");
+	JLabel eMinute = new JLabel("<html><b>Minute:</b></html>");
+	JTextField eHourInput = new JTextField();
+	JTextField eMinuteInput = new JTextField();
+
+	//Glue
+        eTime.add(eHour);
+	eTime.add(eHourInput);
+	//Gap
+	eTime.add(eMinute);
+	eTime.add(eMinuteInput);
+	//Glue
+	display.add(eTime);
+
+
+	// Space between end time panels and the constraint boxes
+
+
+	JLabel constraintInfo = new JLabel("<html><b><i>For each of the following sections, check each respective boxes for constraints that will be eligible to vote</i></b></html>");
+	display.add(constraintInfo);
+
+	// Gap
+
+	JLabel conColl = new JLabel("<html><b>College Constraints:</b></html>");
+	display.add(conColl);
+
+	// Gap
+
+	JCheckBox col1 = new JCheckBox("Engineering");
+	col1.setActionCommand("Engineering");
+	JCheckBox col2 = new JCheckBox("Not Engineering");
+	col2.setActionCommand("Not Engineering");
+
+	colCheck = new ArrayList<JCheckBox>();
+	colCheck.add(col1);
+	colCheck.add(col2);
+	
+	display.add(col1);
+	display.add(col2);
+
+	
+	// Space between College constraints and major constraints
+
+	
+	JLabel conMajor = new JLabel("<html><b>Major Constraints:</b></html>");
+	display.add(conMajor);
+
+	// Gap
+
+	JCheckBox major1 = new JCheckBox("Computer Science");
+        major1.setActionCommand("Computer Science");
+	JCheckBox major2 = new JCheckBox("Electrical Engineering");
+        major2.setActionCommand("Electrical Engineering");
+	JCheckBox major3 = new JCheckBox("Computer Engineering");
+        major2.setActionCommand("Computer Engineering");
+	JCheckBox major4 = new JCheckBox("Business");
+        major2.setActionCommand("Business");
+	JCheckBox major5 = new JCheckBox("Art History");
+        major2.setActionCommand("Art History");
+
+        majorCheck = new ArrayList<JCheckBox>();
+        majorCheck.add(major1);
+        majorCheck.add(major2);
+	majorCheck.add(major3);
+	majorCheck.add(major4);
+	majorCheck.add(major5);
+	
+	display.add(major1);
+	display.add(major2);
+	display.add(major3);
+	display.add(major4);
+	display.add(major5);
+
+	
+	// Space between major constraints and rank constraints
+
+	
+	JLabel conRank = new JLabel("<html><b>Class Rank Constraints:</b></html>");
+	display.add(conRank);
+
+	// Gap
+
+	JCheckBox rank1 = new JCheckBox("Freshman");
+        rank1.setActionCommand("Freshman");
+	JCheckBox rank2 = new JCheckBox("Sophomore");
+        rank2.setActionCommand("Sophomore");
+	JCheckBox rank3 = new JCheckBox("Junior");
+        rank3.setActionCommand("Junior");
+	JCheckBox rank4 = new JCheckBox("Senior");
+        rank4.setActionCommand("Senior");
+
+        rankCheck = new ArrayList<JCheckBox>();
+        rankCheck.add(rank1);
+        rankCheck.add(rank2);
+	rankCheck.add(rank3);
+	rankCheck.add(rank4);
+	
+	display.add(rank1);
+	display.add(rank2);
+	display.add(rank3);
+	display.add(rank4);
+
+	
+	// Space between rank constraints and the undergrad constraint
+
+	
+        JLabel conUndergrad = new JLabel("<html><b>Limit to undergrad students only:</b></html>");
+	display.add(conUndergrad);
+
+	// Gap
+
+	JRadioButton underY = new JRadioButton("Yes");
+	underY.setActionCommand("true");
+	JRadioButton underN = new JRadioButton("No");
+	underN.setActionCommand("false");
+	underN.setSelected(true);
+
+	undergradCheck = new ButtonGroup();
+	undergradCheck.add(underY);
+	undergradCheck.add(underN);
+
+	display.add(underY);
+	display.add(underN);
+
+	
+	// Space between undergrad constraint and registered constraint
+
+	
+	JLabel conRegister = new JLabel("<html><b>Limit to registered students only:</b></html>");
+	display.add(conRegister);
+
+	// Gap
+
+	JRadioButton regY = new JRadioButton("Yes");
+        regY.setActionCommand("true");
+	regY.setSelected(true);
+	JRadioButton regN = new JRadioButton("No");
+        regN.setActionCommand("false");
+
+        registerCheck = new ButtonGroup();
+        registerCheck.add(regY);
+        registerCheck.add(regN);
+
+	display.add(regY);
+	display.add(regN);
+
+	
+	// Space between registered constraint and the race panel(s)
+
+	
+        raceWrap = new JPanel();
+	raceWrap.setLayout(new BoxLayout(raceWrap, BoxLayout.PAGE_AXIS));
+
+	JButton close = new JButton("Close");
+	close.addActionListener(this);
+	close.setActionCommand("closeEC");
+	close.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+	display.add(addEC);
+
+	// Small gap between buttons
+	display.add(Box.createRigidArea(new Dimension(0,5)));
+	
+	display.add(close);
+
+	// Gap after close button
+	display.add(Box.createRigidArea(new Dimension(0,10)));
+
+        setSize(400,360);
+        setResizable(false);
+	
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().add(display);
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - getWidth()) /2 );
+        int y = (int) ((dimension.getHeight() - getHeight()) /2);
+        setLocation(x, y);
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e)
+    {
+	if(e.getActionCommand().equals("closeEC"))
+	    {
+	        this.dispose();
+	    }
+	else if(e.getActionCommand().equals("addEC"))
+	    {
+		new ecDialog();
+	    }
+	else
+	    {
+		int choice = JOptionPane.showConfirmDialog(null,"Are you sure you want to remove the user: " + e.getActionCommand() + " ?","Confirmation",JOptionPane.YES_NO_OPTION);
+		
+		if(choice == JOptionPane.YES_OPTION)
+		    {
+			holder.removeEC(e.getActionCommand());
+			updateList();
+		    }
+	    }
+    }
+
+    public static void main(String[] args)
+    {
+	ElectionList temp = new ElectionList();
+	new CreateElectionGUI("TestUser",temp);
+    }
+}
