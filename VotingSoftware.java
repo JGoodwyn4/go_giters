@@ -55,7 +55,7 @@ public class VotingSoftware implements ActionListener{
 	 */
 	private void initialize() {
 		
-                
+	    EL = new ElectionList();
                
                
           /************************************************/
@@ -395,35 +395,35 @@ public class VotingSoftware implements ActionListener{
         
         
         public static void main(String[] args) {
-			
-		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VotingSoftware window = new VotingSoftware();
-					window.LogFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+	    
+	    
+	    EventQueue.invokeLater(new Runnable() {
+		    public void run() {
+			try {
+			    VotingSoftware window = new VotingSoftware();
+			    window.LogFrame.setVisible(true);
+			} catch (Exception e) {
+			    e.printStackTrace();
 			}
+		    }
 		});
 	}
-
+    
+    
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+	// TODO Auto-generated method stub
+        
+	String temp = new String(passwordField.getPassword());
+        
+        
 	
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-         
-                   String temp = new String(passwordField.getPassword());
-                
-                   
-		
-		if(e.getActionCommand().equals("log"))
+	if(e.getActionCommand().equals("log"))
 	    {     
 		if((logtextField.getText()).equals(""))
 		    {
-                        
+			
 			JOptionPane.showMessageDialog(null,"Username Box is Empty. Please Enter in a Username","Incorrect Username",JOptionPane.ERROR_MESSAGE);
 		    }
 		else if(temp.equals(""))
@@ -433,31 +433,37 @@ public class VotingSoftware implements ActionListener{
 		else
 		    {
 			currentUser = new User(logtextField.getText());
-
+			
 			if(currentUser.login(temp))
 			    {
 				JOptionPane.showMessageDialog(null,"Login was Successful","Success",JOptionPane.PLAIN_MESSAGE);
-					if (currentUser.isEC()){
-                                            currentUser = new ElectionCommissioner(currentUser);
-                                        
-                                        ECFrame.setVisible(true);
-                                        LogFrame.setVisible(false);
-                                  
-                                       
-                                        }
-                                        
-                                        
-                                      else if (currentUser.isHSO()){
-                                      LogFrame.setVisible(false);
-                                      HSOFrame.setVisible(true);
-                                      
-                                        }
-                                        else
-                                        { 
-                                          StudentFrame.setVisible(true);
-                                          LogFrame.setVisible(false);
-                                        }
-                                       
+				if (currentUser.isEC()){
+				    currentUser = new ElectionCommissioner(currentUser);
+                                    
+				    //ECFrame.setVisible(true);
+				    LogFrame.setVisible(false);
+
+				    new ECGUI(EL,currentUser);
+                                    
+				}
+                                
+                                
+				else if (currentUser.isHSO()){
+				    LogFrame.setVisible(false);
+				    //HSOFrame.setVisible(true);
+
+				    new HSOGUI(EL,currentUser);
+                                    
+				}
+				else
+				    { 
+					currentUser = new Student(currentUser);
+					//StudentFrame.setVisible(true);
+					LogFrame.setVisible(false);
+
+					new StudentGUI(EL,currentUser);
+				    }
+				
 			    }
 			else
 			    {
@@ -465,62 +471,62 @@ public class VotingSoftware implements ActionListener{
 			    }
 		    } 
 	    }
-                
-               if(e.getActionCommand().equals("logout")){
-                   ECFrame.setVisible(false);
-                   LogFrame.setVisible(true);
-                   HSOFrame.setVisible(false);
-               
-               } 
-               
-               if(e.getActionCommand().equals("DQ")){
+	
+	if(e.getActionCommand().equals("logout")){
+	    ECFrame.setVisible(false);
+	    LogFrame.setVisible(true);
+	    HSOFrame.setVisible(false);
+            
+	} 
         
-                  
-                   DQFrame.setVisible(true);
-                   LogFrame.setVisible(false);
-               
-               }
-                   if(e.getActionCommand().equals("Recount")){
-        
-                  
-                   Recount.setVisible(true);
-                   LogFrame.setVisible(false);
-                   
-               
-               }
-                if(e.getActionCommand().equals("ManageEC")){
-        
-                  
-                new ManageECGUI();
-               
-               }
-                if(e.getActionCommand().equals("Certify")){
-        
-                  
-              // new CertifyGUI();
-               
-               }
+	if(e.getActionCommand().equals("DQ")){
+	    
+            
+	    DQFrame.setVisible(true);
+	    LogFrame.setVisible(false);
+            
+	}
+	if(e.getActionCommand().equals("Recount")){
+	    
+            
+	    Recount.setVisible(true);
+	    LogFrame.setVisible(false);
+            
+            
+	}
+	if(e.getActionCommand().equals("ManageEC")){
+	    
+            
+	    new ManageECGUI();
+            
+	}
+	if(e.getActionCommand().equals("Certify")){
+	    
+            
+	    // new CertifyGUI();
+            
+	}
+	
+	if(e.getActionCommand().equals("RYes"))
+	    {     
 		
-		if(e.getActionCommand().equals("RYes"))
-	    {     
-              
                 JOptionPane.showMessageDialog(null,"Recount was Successful","Success",JOptionPane.PLAIN_MESSAGE);
-                
+		
             }
-                if(e.getActionCommand().equals("Rno"))
+	if(e.getActionCommand().equals("Rno"))
 	    {     
-              
+		
                 Recount.dispose();
                 
             }
-                
-                
-                
-               
-       
-                
-                
-                
-	}
-
+	
+        
+        
+        
+	
+        
+        
+        
+    }
+    
 }

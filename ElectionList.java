@@ -37,19 +37,32 @@ public class ElectionList
 	count++;
         elections.add(newElection);
     }
-    
-    public Election getElection(ArrayList<Election>elections, int id){
+
+    /*
+    public Election getElection(ArrayList<Election> elections, int id){
         for(Election e: elections){
             if(id == e.getElectionID()) return e;
         }
         return null;
     }
+    */
 
+    public Election getElection(int eID)
+    {
+	for(int i = 0; i < elections.size(); i++)
+	    {
+		if(elections.get(i).isElection(eID))
+		    {
+			return elections.get(i);
+		    }
+	    }
+
+	return null;
+    }
     
-    
-public int getCount(){
-    return count;
-}
+    public int getCount(){
+	return count;
+    }
     
 
     

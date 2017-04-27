@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
+import java.util.ArrayList;
+
 /**
  *
  * @author najeeullah.williams
@@ -20,7 +22,9 @@ public class HSOGUI extends JFrame implements ActionListener {
    private User currentUser;
     
     
-    HSOGUI(){
+    HSOGUI(ElectionList EL,User currentUser){
+	this.EL = EL;
+	this.currentUser = currentUser;
     
         setTitle("Head Of Student Orgs");
 	JPanel display = new JPanel();
@@ -43,7 +47,7 @@ public class HSOGUI extends JFrame implements ActionListener {
         
 
         
-        EL = new ElectionList();
+        //EL = new ElectionList();
 	HSO_pan = new ArrayList<JPanel>();
         ArrayList<Election> EList = EL.getECElections(currentUser.getUsername());
         
@@ -83,7 +87,7 @@ public class HSOGUI extends JFrame implements ActionListener {
 	display.add(Box.createRigidArea(new Dimension(0,10)));
         
        
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
       
         
@@ -130,60 +134,61 @@ public class HSOGUI extends JFrame implements ActionListener {
         SEtemp.add(btnRecount);
         
                 
-       HSO_pan.add(SEtemp);
+	HSO_pan.add(SEtemp);
         }
-      
+	
         
-		
-         }
-         
-         private void addHSOComponents()
-         {
-             for(JPanel HE : HSO_pan)
+	
+     }
+    
+    private void addHSOComponents()
+    {
+	for(JPanel HE : HSO_pan)
 	    {
 		// Gap used to space out each panel
 	        HSOFRAME.add(Box.createRigidArea(new Dimension(0,5)));
 		
 		HSOFRAME.add(HE);
-
+		
 		// Gap used to space out each panel
 	        HSOFRAME.add(Box.createRigidArea(new Dimension(0,5)));
 	    }
-         }
-           
-         private void updateStudentList()
+    }
+    
+    private void updateStudentList()
     {
 	HSOFRAME.removeAll();
 	UpdateHSOEpanel();
 	addHSOComponents();
-
+	
 	HSOFRAME.revalidate();
 	HSOFRAME.repaint();
 	
     }
-	
-                
-
-         public static void main(String[] args)
+    
+    
+    /*
+    public static void main(String[] args)
     {
 	new HSOGUI();
     }
+    */
     
     
     
     
     
-     public void actionPerformed(ActionEvent e)
+    public void actionPerformed(ActionEvent e)
     {
-   
-    if(e.getActionCommand().equals("Recount"))
+	
+	if(e.getActionCommand().equals("Recount"))
 	    {     
-              
-             int choice = JOptionPane.showConfirmDialog(null,"Are you sure you want a recount " + e.getActionCommand() + " ?","Confirmation",JOptionPane.YES_NO_OPTION);
+		
+		int choice = JOptionPane.showConfirmDialog(null,"Are you sure you want a recount " + e.getActionCommand() + " ?","Confirmation",JOptionPane.YES_NO_OPTION);
 		
 		if(choice == JOptionPane.YES_OPTION)
-                JOptionPane.showMessageDialog(null,"Recount was Successful","Success",JOptionPane.PLAIN_MESSAGE);
- 
-                    }
+		    JOptionPane.showMessageDialog(null,"Recount was Successful","Success",JOptionPane.PLAIN_MESSAGE);
+		
+	    }
     }
 }

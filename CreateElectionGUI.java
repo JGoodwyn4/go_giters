@@ -7,6 +7,7 @@ import java.io.*;
 
 public class CreateElectionGUI extends JFrame implements ActionListener
 {
+    private ElectionList electionList;
     private Election newElection;
     private Ballot newBallot;
 
@@ -38,6 +39,7 @@ public class CreateElectionGUI extends JFrame implements ActionListener
     
     CreateElectionGUI(String username, ElectionList electionList)
     {
+	this.electionList = electionList;
 	newElection = new Election(username,electionList.getCount());
 	newBallot = newElection.getBallot();
 	

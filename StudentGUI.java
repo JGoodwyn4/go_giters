@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,14 +19,15 @@ public class StudentGUI extends JFrame implements ActionListener {
    
    private ArrayList<JPanel> Student_pan;
    private JPanel StudentFrame; 
-   private ElectionList EL;
-   private User currentUser;
+    private ElectionList EL;
+    private User currentUser;
     
     
-    StudentGUI(){
-    
+    StudentGUI(ElectionList EL, User currentUser){
+	this.EL = EL;
+	this.currentUser = currentUser;
         
-        EL = new ElectionList();
+        //EL = new ElectionList();
 	Student_pan = new ArrayList<JPanel>();
         ArrayList<Election> EList = EL.getECElections(currentUser.getUsername());
         
@@ -60,7 +62,7 @@ public class StudentGUI extends JFrame implements ActionListener {
 	display.add(Box.createRigidArea(new Dimension(0,10)));
         
        
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         getContentPane().add(display);
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -105,49 +107,49 @@ public class StudentGUI extends JFrame implements ActionListener {
       
         
 		
-         }
-         
-         private void addStudentComponents()
-         {
-             for(JPanel SE : Student_pan)
+     }
+    
+    private void addStudentComponents()
+    {
+	for(JPanel SE : Student_pan)
 	    {
 		// Gap used to space out each panel
 	        StudentFrame.add(Box.createRigidArea(new Dimension(0,5)));
 		
 		StudentFrame.add(SE);
-
+		
 		// Gap used to space out each panel
 	        StudentFrame.add(Box.createRigidArea(new Dimension(0,5)));
 	    }
-         }
-           
-         private void updateStudentList()
+    }
+    
+    private void updateStudentList()
     {
 	StudentFrame.removeAll();
 	UpdateStudentEpanel();
 	addStudentComponents();
-
+	
 	StudentFrame.revalidate();
 	StudentFrame.repaint();
 	
     }
-	
-                
-
+    
+    
+    /*
          public static void main(String[] args)
     {
 	new StudentGUI();
     }
+    */
     
     
     
     
-    
-     public void actionPerformed(ActionEvent e)
+    public void actionPerformed(ActionEvent e)
     {
-   
+	
         
-    
+	
     }
     
     

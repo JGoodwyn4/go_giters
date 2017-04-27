@@ -7,15 +7,21 @@ import java.net.*;
 
 public class electionListGUI extends JFrame implements ActionListener {
 	
-	User user = new User("mbgable");
-	String name = user.getUsername();
-	ElectionList electionList = new ElectionList();
-	ArrayList<Election> elections = electionList.getECElections(name);
+    private User user;
+    private String name;
+    private ElectionList electionList;
+    private ArrayList<Election> elections;
+    
+    private JPanel display;
+    //private JFrame mainFrame;
 	
-	private JPanel display;
-	private JFrame mainFrame;
+    electionListGUI(User currentUser, ElectionList EL)
+    {
+	user = currentUser;
+	name = currentUser.getUsername();
+	electionList = EL;
+	elections = electionList.getECElections(name);
 	
-	electionListGUI(){	
 			// panelName.setLayout(new BoxLayout(panelName,BoxLayout.LINE_AXIS));
 			//PAGE_AXIS vertical
 		display = new JPanel();
@@ -25,7 +31,7 @@ public class electionListGUI extends JFrame implements ActionListener {
 			button.setActionCommand("edit,"+elect.getElectionID());
 			button.addActionListener(this);
 			display.add(button);
-			JButton remove = new JButton("x");
+			JButton remove = new JButton("X");
 			remove.setActionCommand("remove,"+elect.getElectionID());
 			remove.addActionListener(this);
 			display.add(remove);
@@ -158,7 +164,7 @@ public class electionListGUI extends JFrame implements ActionListener {
 				panel.add(sub7);
 				
 				Ballot ballot = election.getBallot();
-				ArrayList<Race> races = ballot.getAllRaces();
+				ArrayList<Race> races = ballot.getRaceList();
 				
 				for(Race r: races){
 					JPanel p = new JPanel();
@@ -199,20 +205,21 @@ public class electionListGUI extends JFrame implements ActionListener {
 		String result = e.getActionCommand();
 		String[] split = result.split(",");
 		int id = Integer.parseInt(split[1]);
-		ElectionList elect = new ElectionList();
 
 		
-		if(split[0].equals("edit")){
-			Election election = elect.getElection(elections, id);
+		if(split[0].equals("edit"))
+		    {
+			Election election = electionList.getElection(id);
 			EditFrame edit = new EditFrame(election);
-		}
-		else if(split[0].equals("remove")){
-			elect.removeElection(id);
-		}		
-		
-		}
+		    }
+		else if(split[0].equals("remove"))
+		    {
+			electionList.removeElection(id);
+		    }		
 		
 	}
+    
+}
 	
 	
 
