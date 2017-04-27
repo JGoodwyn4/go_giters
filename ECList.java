@@ -1,3 +1,5 @@
+
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -5,9 +7,9 @@ import java.io.FileNotFoundException;
 
 public class ECList
 {
-    ArrayList<String> usernameList;
-    File list;
-    Scanner dataReader;
+    private ArrayList<String> usernameList;
+    private File list;
+    private Scanner dataReader;
 
     public ECList()
     {
@@ -45,6 +47,7 @@ public class ECList
 	    }
     }
 
+    
     public void addEC(String user)
     {
 	if(!hasUser(user))

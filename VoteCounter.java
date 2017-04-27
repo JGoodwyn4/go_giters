@@ -1,5 +1,8 @@
 
 
+
+
+
 public class VoteCounter
 {
     private int choiceID;
@@ -11,7 +14,7 @@ public class VoteCounter
 
     public VoteCounter(int cID, int rID, int bID, int eID)
     {
-	choiceID = cID:
+	choiceID = cID;
 	raceID = rID;
 	ballotID = bID;
 	electionID = eID;

@@ -1,19 +1,23 @@
+
+
+
 import java.util.ArrayList;
 
 public class BinaryRace extends Race {
     
     private String op1;
     private String op2;
+    private String prompt;
     private VoteCounter vc1;
     private VoteCounter vc2;
     
-    public BinaryRace(String raceName, int raceID, int ballotID, int electionID, String op1, String op2) {
-	super(raceName, raceID, ballotID, electionID);
+    public BinaryRace(int raceID, int ballotID, int electionID) {
+	super(raceID, ballotID, electionID);
 	this.op1 = "yes";
 	this.op2 = "no";
 	VoteCounter vc1 = new VoteCounter(1,raceID,ballotID,electionID);
 	VoteCounter vc2 = new VoteCounter(2,raceID,ballotID,electionID);
-	
+	prompt="";
     }
     
     public void set_op1(String op1) { this.op1 = op1; }
@@ -42,6 +46,12 @@ public class BinaryRace extends Race {
 	    }
 
 	return winner;
+    }
+    
+   
+
+   public String getPrompt() {
+     return prompt;
     }
     
 }

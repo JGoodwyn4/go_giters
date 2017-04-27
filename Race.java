@@ -1,4 +1,6 @@
 
+
+
 public class Race {
 
 	private String raceName;
@@ -6,9 +8,9 @@ public class Race {
 	private int ballotID;
 	private int electionID;
 	
-	public Race (String rName, int rID, int bID, int eID){
+	public Race ( int rID, int bID, int eID){
 		
-	        raceName = rName;
+	        raceName = "";
 	        raceID = rID;
 	        ballotID = bID;
 	        electionID = eID;
@@ -19,6 +21,6 @@ public class Race {
 	public String getRaceName() { return raceName;	}	
 	public void setRaceName(String rName) { raceName = rName; }	
 	public boolean matchID(int rID) { return raceID == raceID; }
-	
+	public int getRaceID(){return raceID;}
 	
 }

@@ -1,3 +1,6 @@
+
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -103,7 +106,7 @@ class CertifyGUI extends JFrame implements ActionListener
 			result1.add(Box.createRigidArea(new Dimension(30,0))); // Left Gap
 			result1.add(new JLabel(option1));
 			result1.add(Box.createRigidArea(new Dimension(10,0))); // Gap between labels
-			resilt1.add(new JLabel("-- Vote Count: " + temp.get_vc1().getCount()));
+			result1.add(new JLabel("-- Vote Count: " + temp.get_vc1().getCount()));
 
 			JPanel result2 = new JPanel();
 			result2.setLayout(new BoxLayout(result2,BoxLayout.LINE_AXIS));
@@ -144,7 +147,7 @@ class CertifyGUI extends JFrame implements ActionListener
 		else if(race instanceof NonBinaryRace)
 		    {
 			NonBinaryRace temp = (NonBinaryRace) race; // Re-case race into appropriate type
-			ArrayList<Candidate> orderedList = temp.orderedWinners();
+			ArrayList<Candidates> orderedList = temp.orderedWinners();
 			int maxWin = temp.getNumWinners();
 
 			for(int i = 0; i < orderedList.size(); i++)
@@ -161,7 +164,7 @@ class CertifyGUI extends JFrame implements ActionListener
 				JLabel name = new JLabel(can.getName());
 				candHolder.add(name);
 
-				if(!can.getParty.equals(""))
+				if(!can.getParty().equals(""))
 				    {
 					candHolder.add(Box.createRigidArea(new Dimension(10,0)));
 					JLabel party = new JLabel("-- Party: " + can.getParty());
@@ -193,7 +196,7 @@ class CertifyGUI extends JFrame implements ActionListener
 	Vote record = election.getVote();
 	
         JPanel demoPanel = new JPanel();
-	demoPanel.setLayout(new BoxLayout(ePanel,BowLayout.LINE_AXIS));
+	demoPanel.setLayout(new BoxLayout(ePanel,BoxLayout.LINE_AXIS));
 	JLabel demo = new JLabel("<html><b><i>" + "Demographics:" + "</i></b></html>");
         demo.setFont(new Font("Serif",Font.PLAIN, 16));
 	
@@ -231,7 +234,7 @@ class CertifyGUI extends JFrame implements ActionListener
 	
 	// Get each college and add them as a horizontal panel
 	int[] collegeCount = record.getCollegeCount();
-	for(int i = 0; i < collegeCount.length(); i++)
+	for(int i = 0; i < collegeCount.length; i++)
 	    {
 		if(collegeCount[i] != 0)
 		    {
@@ -256,21 +259,21 @@ class CertifyGUI extends JFrame implements ActionListener
 				break;
 				
 			    case 1:
-				JLabel college = new JLabel("Not Engineering");
-				JLabel colCount = new JLabel("-- Count: " + collegeCount[i]);
+				JLabel college1 = new JLabel("Not Engineering");
+				JLabel colCount1 = new JLabel("-- Count: " + collegeCount[i]);
 
-				cPanel.add(college);
+				cPanel.add(college1);
 				cPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
-				cPanel.add(colCount);
+				cPanel.add(colCount1);
 				break;
 				
 			    default:
-				JLabel college = new JLabel("Unrecognized");
-				JLabel colCount = new JLabel("-- Count: " + collegeCount[i]);
+				JLabel college2 = new JLabel("Unrecognized");
+				JLabel colCount2 = new JLabel("-- Count: " + collegeCount[i]);
 
-				cPanel.add(college);
+				cPanel.add(college2);
 				cPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
-				cPanel.add(colCount);
+				cPanel.add(colCount2);
 				break;
 			    }
 
@@ -293,7 +296,7 @@ class CertifyGUI extends JFrame implements ActionListener
 	
 	// Get each major and add them as a horizontal panel
 	int[] majorCount = record.getMajorCount();
-	for(int i = 0; i < majorCount.length(); i++)
+	for(int i = 0; i < majorCount.length; i++)
 	    {
 		if(majorCount[i] != 0)
 		    {
@@ -318,48 +321,48 @@ class CertifyGUI extends JFrame implements ActionListener
 				break;
 				
 			    case 1:
-			        JLabel major = new JLabel("Electrical Engineering");
-				JLabel mCount = new JLabel("-- Count: " + collegeCount[i]);
+			        JLabel major1 = new JLabel("Electrical Engineering");
+				JLabel mCount1 = new JLabel("-- Count: " + collegeCount[i]);
 
-				majorPanel.add(major);
+				majorPanel.add(major1);
 				majorPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
-				majorPanel.add(mCount);
+				majorPanel.add(mCount1);
 				break;
 
 			    case 2:
-				JLabel major = new JLabel("Computer Engineering");
-				JLabel mCount = new JLabel("-- Count: " + collegeCount[i]);
+				JLabel major2 = new JLabel("Computer Engineering");
+				JLabel mCount2 = new JLabel("-- Count: " + collegeCount[i]);
 
-				majorPanel.add(major);
+				majorPanel.add(major2);
 				majorPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
-				majorPanel.add(mCount);
+				majorPanel.add(mCount2);
 				break;
 
 			    case 3:
-				JLabel major = new JLabel("Business");
-				JLabel mCount = new JLabel("-- Count: " + collegeCount[i]);
+				JLabel major3 = new JLabel("Business");
+				JLabel mCount3 = new JLabel("-- Count: " + collegeCount[i]);
 
-				majorPanel.add(major);
+				majorPanel.add(major3);
 				majorPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
-				majorPanel.add(mCount);
+				majorPanel.add(mCount3);
 				break;
 
 			    case 4:
-				JLabel major = new JLabel("Art History");
-				JLabel mCount = new JLabel("-- Count: " + collegeCount[i]);
+				JLabel major4 = new JLabel("Art History");
+				JLabel mCount4 = new JLabel("-- Count: " + collegeCount[i]);
 
-				majorPanel.add(major);
+				majorPanel.add(major4);
 				majorPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
-				majorPanel.add(mCount);
+				majorPanel.add(mCount4);
 				break;
 				
 			    default:
-				JLabel major = new JLabel("Unrecognized");
-				JLabel mCount = new JLabel("-- Count: " + collegeCount[i]);
+				JLabel major5 = new JLabel("Unrecognized");
+				JLabel mCount5 = new JLabel("-- Count: " + collegeCount[i]);
 
-				majorPanel.add(major);
+				majorPanel.add(major5);
 				majorPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
-				majorPanel.add(mCount);
+				majorPanel.add(mCount5);
 				break;
 			    }
 
@@ -382,7 +385,7 @@ class CertifyGUI extends JFrame implements ActionListener
 	
 	// Get each rank and add them as a horizontal panel
 	int[] rankCount = record.getRankCount();
-	for(int i = 0; i < rankCount.length(); i++)
+	for(int i = 0; i < rankCount.length; i++)
 	    {
 		if(rankCount[i] != 0)
 		    {
@@ -390,7 +393,7 @@ class CertifyGUI extends JFrame implements ActionListener
 			main.add(Box.createRigidArea(new Dimension(0,5)));
 			
 			
-			JPanel rankPanel = new rankPanel();
+			JPanel rankPanel = new JPanel();
 			rankPanel.setLayout(new BoxLayout(rankPanel,BoxLayout.LINE_AXIS));
 		        rankPanel.add(Box.createRigidArea(new Dimension(30,0))); // Left Gap
 			
@@ -407,39 +410,39 @@ class CertifyGUI extends JFrame implements ActionListener
 				break;
 				
 			    case 1:
-			        JLabel rank = new JLabel("Sophomore");
-				JLabel rCount = new JLabel("-- Count: " + collegeCount[i]);
+			        JLabel rank1 = new JLabel("Sophomore");
+				JLabel rCount1 = new JLabel("-- Count: " + collegeCount[i]);
 
-			        rankPanel.add(rank);
+			        rankPanel.add(rank1);
 				rankPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
-				rankPanel.add(rCount);
+				rankPanel.add(rCount1);
 				break;
 
 			    case 2:
-			        JLabel rank = new JLabel("Junior");
-				JLabel rCount = new JLabel("-- Count: " + collegeCount[i]);
+			        JLabel rank2 = new JLabel("Junior");
+				JLabel rCount2 = new JLabel("-- Count: " + collegeCount[i]);
 
-			        rankPanel.add(rank);
+			        rankPanel.add(rank2);
 				rankPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
-				rankPanel.add(rCount);
+				rankPanel.add(rCount2);
 				break;
 
 			    case 3:
-			        JLabel rank = new JLabel("Senior");
-				JLabel rCount = new JLabel("-- Count: " + collegeCount[i]);
+			        JLabel rank3 = new JLabel("Senior");
+				JLabel rCount3 = new JLabel("-- Count: " + collegeCount[i]);
 
-			        rankPanel.add(rank);
+			        rankPanel.add(rank3);
 				rankPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
-				rankPanel.add(rCount);
+				rankPanel.add(rCount3);
 				break;
 				
 			    default:
-			        JLabel rank = new JLabel("Unrecognized");
-				JLabel rCount = new JLabel("-- Count: " + collegeCount[i]);
+			        JLabel rank4 = new JLabel("Unrecognized");
+				JLabel rCount4 = new JLabel("-- Count: " + collegeCount[i]);
 
-			        rankPanel.add(rank);
+			        rankPanel.add(rank4);
 				rankPanel.add(Box.createRigidArea(new Dimension(10,0))); // Gap between both labels
-				rankPanel.add(rCount);
+				rankPanel.add(rCount4);
 				break;
 			    }
 
@@ -579,14 +582,14 @@ class CertifyGUI extends JFrame implements ActionListener
 
 	JScrollPane scrollList = new JScrollPane(main);
 	scrollList.setAlignmentX(Component.CENTER_ALIGNMENT);
-        add(scrollList);
+        
 	
 
         setSize(500,400);
 	setResizable(false);
 	
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        getContentPane().add(display);
+        getContentPane().add(scrollList);
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - getWidth()) /2 );
         int y = (int) ((dimension.getHeight() - getHeight()) /2);
@@ -611,9 +614,5 @@ class CertifyGUI extends JFrame implements ActionListener
 	    }
     }
 
-    public static void main(String[] args)
-    {
-	new CertifyGUI();
-    }    
-    
+   
 }

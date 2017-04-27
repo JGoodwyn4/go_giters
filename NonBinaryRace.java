@@ -1,3 +1,6 @@
+
+
+
 import java.util.ArrayList;
 
 public class NonBinaryRace extends Race{
@@ -5,12 +8,13 @@ public class NonBinaryRace extends Race{
     private ArrayList<Candidates> candidates;
     private int numWinners;
     private int maxChoices;
+
     
-    public NonBinaryRace(String raceName, int raceID, int ballotID, int electionID, ArrayList<Candidates> candidates, int numWinners, int maxChoices) {
-	super(raceName, raceID, ballotID, electionID);
-	this.candidates = candidates;
-	this.numWinners = numWinners;
-	this.maxChoices = maxChoices;
+    public NonBinaryRace(int raceID, int ballotID, int electionID) {
+	super( raceID, ballotID, electionID);
+	this.candidates = new ArrayList<Candidates>();
+	this.numWinners = 1;
+	this.maxChoices = 1;
     }
     
     public void setNumWiners(int numWinners){
@@ -39,6 +43,10 @@ public class NonBinaryRace extends Race{
     
     public int numCandidates(){
 	return candidates.size();
+    }
+    
+    public ArrayList<Candidates> getCandidates(){
+        return candidates;
     }
     
     public ArrayList<Candidates> orderedWinners()

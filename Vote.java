@@ -1,3 +1,6 @@
+
+
+
 import java.util.ArrayList;
 
 public class Vote
@@ -9,7 +12,8 @@ public class Vote
     private int[] undergradCount;  // 0 = undergrad, 1 = grad
     private int[] registeredCount; // 0 = registered, 1 = not registered
     private ArrayList<RaceVote> votes;
-
+    
+    
     public Vote(int eID)
     {
 	electionID = eID;
@@ -32,9 +36,9 @@ public class Vote
 	return false;
     }
 
-    public void addRaceVote(String username, int ballotID, ArrayList<int> raceIDs, ArrayList<int> choiceIDs)
+    public void addRaceVote(String username, int electionID, int ballotID, ArrayList<VoteCounter> voteCounter)
     {
-	votes.add(new RaceVote(username, electionID, ballotID, raceIDs, choiceIDs));
+	votes.add(new RaceVote(username, electionID, ballotID, voteCounter));
     }
 
     public void removeRaceVote(String username)
@@ -68,13 +72,13 @@ public class Vote
     
     public void addMajorCount(String major)
     {
-        int index = getMajorIndex(college);
+        int index = getMajorIndex(major);
 	majorCount[index]++;
     }
     
     public void addRankCount(String rank)
     {
-        int index = getRankIndex(college);
+        int index = getRankIndex(rank);
 	rankCount[index]++;
     }
     
@@ -104,13 +108,13 @@ public class Vote
     
     public void removeMajorCount(String major)
     {
-        int index = getMajorIndex(college);
+        int index = getMajorIndex(major);
 	majorCount[index]--;
     }
     
     public void removeRankCount(String rank)
     {
-        int index = getRankIndex(college);
+        int index = getRankIndex(rank);
 	rankCount[index]--;
     }
     
@@ -134,7 +138,7 @@ public class Vote
     // Separate methods to get the correct index given a value
     private int getCollegeIndex(String college)
     {
-	int index = collegeCount.length() - 1;
+	int index = collegeCount.length - 1;
 	
 	switch(college)
 	    {
@@ -153,7 +157,7 @@ public class Vote
 
     private int getMajorIndex(String major)
     {
-	int index = majorCount.length() - 1;
+	int index = majorCount.length- 1;
 	
 	switch(major)
 	    {
@@ -204,3 +208,4 @@ public class Vote
 	return index;
     }
 }
+

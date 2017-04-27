@@ -1,9 +1,14 @@
+
+
+
 import java.util.ArrayList;
 
 public class Ballot
 {
     private int ballotID;
     private int electionID;
+    private int Bcounter;
+
     
     private ArrayList<String> collegeCons;
     private ArrayList<String> majorCons;
@@ -13,18 +18,12 @@ public class Ballot
     
     private ArrayList<Race> raceList;
 
-    public Ballot(int eID, int bID, ArrayList<String> collegeConstraints, ArrayList<String> majorConstraints, ArrayList<String> classConstraints, boolean undergradConstraint, boolean registrationConstraint)
+    public Ballot(int eID, int bID)
     {
 	electionID = eID;
 	ballotID = bID;
-
-	collegeCons = collegeConstraints;
-	majorCons = majorConstraints;
-	classCons = classConstraints;
-	undergradCon = undergradConstraint;
-	regCon = registrationConstraint;
-
 	raceList = new ArrayList<Race>();
+        Bcounter =0;
     }
 
     public ArrayList<String> getCollegeConstraints() { return collegeCons; }
@@ -40,7 +39,7 @@ public class Ballot
     public void setRegistrationConstraints(boolean newCons) { regCon = newCons; }
 
     public int getBallotID() { return ballotID; }
-    public int isBallotID(int bID) { return (ballotID == bID); }
+    public boolean isBallotID(int bID) { return (ballotID == bID); }
     public int numRaces() { return raceList.size(); }
     public ArrayList<Race> getRaceList() { return raceList; }
 
@@ -95,13 +94,15 @@ public class Ballot
     // Add in data/parameters
     public void addBinaryRace()
     {
-	raceList.add(new BinaryRace());
+	raceList.add(new BinaryRace(Bcounter, ballotID, electionID ));
+        Bcounter++;
     }
 
     // Add in data/parameters
     public void addNonBinaryRace()
     {
-	raceList.add(new NonBinaryRace());
+	raceList.add(new NonBinaryRace(Bcounter, ballotID, electionID));
+        Bcounter++;
     }
 
     public void removeRace(int raceID)
@@ -111,12 +112,22 @@ public class Ballot
 
     public Race getRace(int raceID)
     {
-	
+        
+        for (Race r: raceList){
+            if(r.matchID(raceID)){
+                return r;
+            }
+           
+        }
+        
+	return null; 
     }
 
-    private int getRaceIndex(int raceID)
-    {
-
-    }
-    
+//    private int getRaceIndex(int raceID)
+//    {
+//
+//        
+//    }
+//    
+   
 }

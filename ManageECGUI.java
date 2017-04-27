@@ -1,3 +1,5 @@
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -163,6 +165,7 @@ class ManageECGUI extends JFrame implements ActionListener
 	    }
     }
 
+    
     public static void main(String[] args)
     {
 	new ManageECGUI();
@@ -302,6 +305,8 @@ class ManageECGUI extends JFrame implements ActionListener
 		    this.dispose();
 		}
 	}
+        
+         
     }
     
     

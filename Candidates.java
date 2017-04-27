@@ -1,4 +1,6 @@
 
+
+
 public class Candidates {
 
 	private int choiceID;
@@ -7,17 +9,20 @@ public class Candidates {
 	private VoteCounter vc;
 	
 	
-	public Candidates(int cID){
-	        choiceID = cID;
-	        name = "";
-	        party = "";
-		VoteCounter vc = new VoteCounter(cID,0,0,0);
+	public Candidates(int choiceID, String name, String party){
+		this.choiceID = choiceID;
+		this.name = name;
+		this.party = party;
+		VoteCounter vc = new VoteCounter( choiceID);
 	}
-	
+	public void get(){
+            
+        }
 	public void setID(int choiceID){
 		this.choiceID = choiceID;
 	}
 	
+        
 	public void setName(String name){
 		this.name = name;
 	}
